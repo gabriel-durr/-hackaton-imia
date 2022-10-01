@@ -50,8 +50,8 @@ export const colors = {
 };
 
 const fonts = {
-	heading: "Rubik, sans-serif",
-	body: "Open Sans, sans-serif",
+	heading: "DM Sans, sans-serif",
+	body: "DM Sans, sans-serif",
 };
 
 const theme = extendTheme({
