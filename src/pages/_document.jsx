@@ -1,5 +1,3 @@
-/* document google fonts and chakra color mode config */
-
 import Document, {Head, Html, Main, NextScript} from "next/document";
 
 export default class MyDocument extends Document {
@@ -20,6 +18,7 @@ export default class MyDocument extends Document {
 						href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
 						rel="stylesheet"
 					/>
+					<link rel="shortcut icon" href="/favicon.png" />
 
 					<body>
 						<Main />

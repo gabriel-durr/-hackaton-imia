@@ -3,7 +3,7 @@ import {extendTheme} from "@chakra-ui/react";
 const styles = {
 	global: {
 		"html, body": {
-			bg: "gray.400",
+			bg: "whiteAlpha.900",
 			color: "grey.900",
 			fontSize: "0.95rem",
 			overflowX: "hidden",
@@ -15,7 +15,7 @@ const styles = {
 			},
 			"&::-webkit-scrollbar-thumb": {
 				width: "8px",
-				backgroundColor: "gray.600",
+				bgColor: "gray.600",
 				borderRadius: "4px",
 			},
 		},
