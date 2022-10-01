@@ -16,7 +16,8 @@ export const Header = () => {
 				variant="outline"
 				p="1.5rem"
 				_hover={{
-					bg: "#416e8296",
+					bg: "#5e8a9c56",
+					transition: ".4s ease",
 				}}>
 				<MdOutlineAccountCircle size="1.7rem" color="#fff" />
 				<Text as="span" color="#fff" ml="5px">
