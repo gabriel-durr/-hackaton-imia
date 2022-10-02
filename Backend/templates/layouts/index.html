@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+    {% for id in id1 %}
+        <h3>{{id}}</h3>
+        <div id="{{id}}"></div>
+    {% endfor %}
+
+</body>
+
+
+<footer>
+    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Plotly.js -->
+     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script type="text/javascript">
+
+        var graph1 = {{graphJSON | safe}};
+        var id1 = {{id1 | safe}};
+
+        for(var i in graph1) {
+            Plotly.plot(id1[i], // the ID of the div, created above
+                        graph1[i].data,
+                        graph1[i].layout || {});
+        }
+
+    </script>
+
+</footer>
+
+</html>
