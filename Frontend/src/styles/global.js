@@ -61,9 +61,6 @@ const styles = {
 			border: "1px #000 solid",
 			padding: "15px 30px",
 			margin: "5px 10px"
-		},
-		ul:{
-			listStyle: "none"
 		}
 	},
 };

@@ -4,7 +4,7 @@ import {MdOutlineAccountCircle} from "react-icons/md";
 import { Dropzone } from '../../../utils/Dropzone';
 import { DraggableList } from '../../../utils/DraggableList';
 
-export const DataTemplate = () => {
+export const DataTemplate = ({setStep}) => {
 	const [title, setTitle] = useState("");
     const [hasFile, setHasFile] = useState(false);
     const [keysList, setKeysList] = useState([])
@@ -18,6 +18,10 @@ export const DataTemplate = () => {
             .then(data => setKeysList(data.data))
             .catch(error => console.log(error))
         }
+    }
+
+    const onHandleStep = () => {
+        setStep(prev => prev + 1)
     }
     
     return (
@@ -67,7 +71,35 @@ export const DataTemplate = () => {
                     </Text>
                 </Button>}
             </Flex>
-            <DraggableList list={keysList} setItemList={setKeysList}/>
+            <Flex
+                direction="row"
+                justifyContent="space-between"
+                w="40em"
+                alignItems="flex-end">
+                <DraggableList list={keysList} setItemList={setKeysList}/>
+                {keysList.length > 0 && <Button
+                    variant="outline"
+                    flexDirection="column"
+                    width="15em"
+                    height="5em"
+                    bg="#0a5779"
+                    marginLeft="10px"
+                    _hover={{
+                        bg: "#5e8a9c56",
+                        transition: ".4s ease",
+                    }}
+                    onClick={()=> onHandleStep()}>
+                    <Text
+                        fontSize="1.09rem"
+                        as="span"
+                        color="#fff"
+                        ml="5px"
+                        fontWeight="thin">
+                        Next
+                    </Text>
+                </Button>}
+
+            </Flex>
 		</Flex>
 	);
 };

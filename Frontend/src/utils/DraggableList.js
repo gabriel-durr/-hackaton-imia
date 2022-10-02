@@ -21,7 +21,7 @@ export const DraggableList = ({list, setItemList}) => {
                 <DragDropContext onDragEnd={handleDrop}>
                     <Droppable droppableId="list-container" >
                         {(provided) => (
-                            <ul
+                            <ol
                             className="list-container"
                             {...provided.droppableProps}
                             ref={provided.innerRef}
@@ -41,7 +41,7 @@ export const DraggableList = ({list, setItemList}) => {
                                 </Draggable>
                             ))}
                             {provided.placeholder}
-                            </ul>
+                            </ol>
                         )}
                     </Droppable>
                 </DragDropContext>
