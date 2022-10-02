@@ -4,10 +4,8 @@ import {MdOutlineAccountCircle} from "react-icons/md";
 export const Tabs = ({selected, onSelect}) => {
 	return (
 		<Flex
-			h="100vh"
 			w="100vw"
 			align="flex-start"
-			px="2rem"
 			justify="center"
             marginTop="20px">
 			<Button

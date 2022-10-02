@@ -3,6 +3,7 @@ import {Flex, Stack, Text} from "@chakra-ui/react";
 import {Footer} from "../components/Footer";
 import {Header} from "../components/Header";
 import {Tabs} from "../components/Tabs";
+import {ContentPanel} from "../components/ContentPanel";
 
 export default function Home() {
 
@@ -13,11 +14,11 @@ export default function Home() {
 	}
 
 	return (
-		<Flex w="100vw" h="100vh" justify="space-between" direction="column">
+		<Flex w="100vw" h="100vh" justify="space-between" direction="column" overflowY="scroll">
 			<Header />
-			<Stack w="100%" maxW="container.xl" bg="whiteAlpha.800">
+			<Stack h="100%" w="100%" maxW="container.xl" bg="whiteAlpha.800" align="center">
 				<Tabs selected={selected} onSelect={ onSelected }/>
-				<Text></Text>
+				<ContentPanel selectedTemplate={selected}/>
 			</Stack>
 			<Footer />
 		</Flex>
