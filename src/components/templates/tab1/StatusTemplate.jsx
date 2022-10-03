@@ -30,6 +30,7 @@ export const StatusTemplate = ({setStep}) => {
 			</Text>
 			<Input
 				type="text"
+				w="30rem"
 				border="1px #000 solid"
 				value={title}
 				onChange={e => setTitle(e.target.value)}
