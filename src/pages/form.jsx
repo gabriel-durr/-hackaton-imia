@@ -46,7 +46,7 @@ export default function Form({data}) {
 				/>
 				<ContentPanel
 					selectedTemplate={selected}
-					tab1={<DataTemplate />}
+					tab1={<DataTemplate data={data.dataObject} />}
 					tab2={<StatusTemplate />}
 					tab3={<ProceduresTemplate />}
 				/>

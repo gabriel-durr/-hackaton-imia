@@ -15,9 +15,9 @@ export const DataTemplate = ({setStep, data}) => {
 		}
 	};
 
-	const onHandleStep = () => {
-		setStep(prev => prev + 1);
-	};
+	// const onHandleStep = () => {
+	// 	setStep(prev => prev + 1);
+	// };
 
 	return (
 		<Flex
@@ -72,7 +72,7 @@ export const DataTemplate = ({setStep, data}) => {
 				w="40em"
 				alignItems="flex-end">
 				<DraggableList list={keysList} setItemList={setKeysList} />
-				{keysList.length > 0 && (
+				{/* {keysList.length > 0 && (
 					<Button
 						variant="outline"
 						flexDirection="column"
@@ -94,7 +94,7 @@ export const DataTemplate = ({setStep, data}) => {
 							Next
 						</Text>
 					</Button>
-				)}
+				)} */}
 			</Flex>
 		</Flex>
 	);
