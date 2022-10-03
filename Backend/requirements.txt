@@ -1,8 +1,0 @@
-
-plotly
-flask
-ipywidgets
-cherrypy
-requests
-cors
-flask_cors
