@@ -9,6 +9,7 @@ export const Header = () => {
 			align="center"
 			px="2rem"
 			justify="space-between"
+			shadow="xl"
 			bgGradient="linear(90deg, #0a5779 0%,  #1976a2 100%, #21889b 100%)">
 			<Image alt="iMia" src="/i-mia.png" w="290px" h="120px" />
 			<Button

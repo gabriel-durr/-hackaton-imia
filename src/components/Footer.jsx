@@ -8,6 +8,7 @@ export const Footer = () => {
 			w="100vw"
 			align="center"
 			justify="center"
+			shadow="dark-lg"
 			bgGradient="linear(90deg, #0a5779 0%,  #1976a2 100%, #21889b 100%)">
 			<Heading color="#fff">Footer</Heading>
 		</Flex>
