@@ -1,18 +1,19 @@
-import {useState} from "react";
 import {Flex, Stack} from "@chakra-ui/react";
-
+import {useState} from "react";
 import {Footer} from "../components/Footer";
 import {Header} from "../components/Header";
-import {Tabs} from "../components/Tabs";
-import {ContentPanel} from "../components/ContentPanel";
-import {Tab3Template} from "../components/templates/tab3/Tab3Template";
-import {
-	FaStepBackward,
-	FaStepForward,
-	FaDigitalTachograph,
-} from "react-icons/fa";
 
-export default function Home({data}) {
+import {DataTemplate} from "../components/templates/tab1/DataTemplate";
+import {ProceduresTemplate} from "../components/templates/tab1/ProceduresTemplate";
+import {StatusTemplate} from "../components/templates/tab1/StatusTemplate";
+import {ContentPanel} from "../components/ContentPanel";
+
+import {Tabs} from "../components/Tabs";
+import {IoExit} from "react-icons/io5";
+import {ImEnter, ImPlus, ImCross} from "react-icons/im";
+import {BsBezier} from "react-icons/bs";
+
+export default function Form({data}) {
 	const [selected, setSelected] = useState("TAB1");
 
 	const onSelected = selected => {
@@ -36,43 +37,24 @@ export default function Home({data}) {
 				<Tabs
 					selected={selected}
 					onSelect={onSelected}
-					label1="anterior"
-					label2="agora"
-					label3="próximo"
-					icon1={FaStepBackward}
-					icon2={FaDigitalTachograph}
-					icon3={FaStepForward}
+					label1="formulários"
+					label2="status"
+					label3="ações"
+					icon1={ImEnter}
+					icon2={BsBezier}
+					icon3={IoExit}
 				/>
 				<ContentPanel
 					selectedTemplate={selected}
-					tab3={
-						<Tab3Template
-							data1={data.data1}
-							data2={data.data2}
-							data3={data.data3}
-						/>
-					}
-					tab2={
-						<Tab3Template
-							data1={data.data1}
-							data2={data.data2}
-							data3={data.data3}
-						/>
-					}
-					tab1={
-						<Tab3Template
-							data1={data.data1}
-							data2={data.data2}
-							data3={data.data3}
-						/>
-					}
+					tab1={<DataTemplate />}
+					tab2={<StatusTemplate />}
+					tab3={<ProceduresTemplate />}
 				/>
 			</Stack>
 			<Footer />
 		</Flex>
 	);
 }
-
 export async function getServerSideProps() {
 	// Fetch data from external API
 	const res = await fetch(`http://localhost:3000/api/main`);

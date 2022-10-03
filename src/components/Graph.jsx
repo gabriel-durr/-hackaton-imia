@@ -1,5 +1,10 @@
-import Plot from "react-plotly.js";
 import {Box} from "@chakra-ui/react";
+
+import dynamic from "next/dynamic";
+// Correction error Reference self is not defined ...
+const Plot = dynamic(() => import("react-plotly.js"), {
+	ssr: false,
+});
 
 export const Graph = ({data1, data2, data3}) => {
 	return (

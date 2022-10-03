@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {Flex, Image, Button, Text} from "@chakra-ui/react";
-import {MdOutlineAccountCircle} from "react-icons/md";
+import {useState} from "react";
+import {Flex} from "@chakra-ui/react";
+
 import {Frequency} from "../../../components/Frequency";
 import {Graph} from "../../../components/Graph";
 
