@@ -1,5 +1,4 @@
 import {Flex, Button, Text, Icon} from "@chakra-ui/react";
-import {MdOutlineAccountCircle} from "react-icons/md";
 
 export const Tabs = ({
 	selected,
@@ -16,18 +15,32 @@ export const Tabs = ({
 			w="min-content"
 			align="flex-start"
 			justify="center"
-			marginTop="20px"
-			h="220px">
+			marginTop="12px"
+			h="70px">
 			<Button
-				variant="outline"
+				zIndex="1"
+				pos="relative"
+				variant="brand"
 				flexDirection="column"
 				width="20rem"
 				height="100%"
 				bg={selected == "TAB1" ? "#9c0c0c" : "#0a5779"}
 				_hover={{
-					filter: "brightness(1.2)",
+					filter: "brightness(1.1)",
 					transition: ".4s ease",
 				}}
+				_after={
+					selected == "TAB1" && {
+						content: "''",
+						pos: "absolute",
+						zIndex: "-1",
+						bottom: "-5",
+						width: "40px",
+						height: "40px",
+						bg: "#9c0c0c",
+						transform: "rotate(45deg)",
+					}
+				}
 				onClick={() => onSelect("TAB1")}>
 				<Icon boxSize="10" color="#fff" as={icon1} />
 				<Text
@@ -41,15 +54,29 @@ export const Tabs = ({
 				</Text>
 			</Button>
 			<Button
-				variant="outline"
+				zIndex="1"
+				pos="relative"
+				variant="brand"
 				flexDirection="column"
 				width="20rem"
 				height="100%"
 				bg={selected == "TAB2" ? "#9c0c0c" : "#0a5779"}
 				_hover={{
-					filter: "brightness(1.2)",
+					filter: "brightness(1.1)",
 					transition: ".4s ease",
 				}}
+				_after={
+					selected == "TAB2" && {
+						content: "''",
+						pos: "absolute",
+						zIndex: "-1",
+						bottom: "-5",
+						width: "40px",
+						height: "40px",
+						bg: "#9c0c0c",
+						transform: "rotate(45deg)",
+					}
+				}
 				onClick={() => onSelect("TAB2")}>
 				<Icon boxSize="10" color="#fff" as={icon2} />
 				<Text
@@ -63,15 +90,29 @@ export const Tabs = ({
 				</Text>
 			</Button>
 			<Button
-				variant="outline"
+				zIndex="1"
+				pos="relative"
+				variant="brand"
 				flexDirection="column"
 				width="20rem"
 				height="100%"
 				bg={selected == "TAB3" ? "#9c0c0c" : "#0a5779"}
 				_hover={{
-					filter: "brightness(1.2)",
+					filter: "brightness(1.1)",
 					transition: ".4s ease",
 				}}
+				_after={
+					selected == "TAB3" && {
+						content: "''",
+						pos: "absolute",
+						zIndex: "-1",
+						bottom: "-5",
+						width: "40px",
+						height: "40px",
+						bg: "#9c0c0c",
+						transform: "rotate(45deg)",
+					}
+				}
 				onClick={() => onSelect("TAB3")}>
 				<Icon boxSize="10" color="#fff" as={icon3} />
 				<Text
