@@ -4,19 +4,14 @@ import {MdOutlineAccountCircle} from "react-icons/md";
 import { Dropzone } from '../../../utils/Dropzone';
 import { DraggableList } from '../../../utils/DraggableList';
 
-export const DataTemplate = ({setStep}) => {
+export const DataTemplate = ({setStep, data}) => {
 	const [title, setTitle] = useState("");
     const [hasFile, setHasFile] = useState(false);
     const [keysList, setKeysList] = useState([])
 
     const onHandleKeys = async() => {
         if(hasFile){
-            await fetch("http://0.0.0.0:9999/get_keys",{
-                method: "POST",
-            })
-            .then(response => response.json())
-            .then(data => setKeysList(data.data))
-            .catch(error => console.log(error))
+            setKeysList(data)
         }
     }
 

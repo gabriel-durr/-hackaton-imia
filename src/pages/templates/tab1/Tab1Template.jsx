@@ -5,12 +5,12 @@ import { DataTemplate } from './DataTemplate';
 import { StatusTemplate } from './StatusTemplate';
 import { ProceduresTemplate } from './ProceduresTemplate';
 
-export const Tab1Template = () => {
+export const Tab1Template = ({ data }) => {
 	const [step, setStep] = useState(0)
     const Template = ({step}) => {
         switch(step){
             case 0:
-                return <DataTemplate setStep={setStep}/>
+                return <DataTemplate setStep={setStep} data={data}/>
             case 1:
                 return <StatusTemplate setStep={setStep}/>
             case 2:

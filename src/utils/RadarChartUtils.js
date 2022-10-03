@@ -11,10 +11,11 @@ export const Unpack = (row, catNumber) => {
 
     arrx = [...Object.keys(row[0][cats[catNumber]].Dados)];
     
-    for(a in arrx){
-        arry.push(row[0][cats[catNumber]].Dados[a] * ty3[catNumber])
-        arrz.push(row[0][cats[catNumber]].Dados[a] * tz3[catNumber])
-    }
+    arrx.forEach(element => {
+        console.log(element)
+        arry.push(row[0][cats[catNumber]].Dados[element])
+        arrz.push(row[0][cats[catNumber]].Dados[element] * tz3[catNumber])
+    });
 
     return {
         "x": arrx,

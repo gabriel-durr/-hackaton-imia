@@ -5,9 +5,11 @@ import {Header} from "../components/Header";
 import {Tabs} from "../components/Tabs";
 import {ContentPanel} from "../components/ContentPanel";
 
-export default function Home() {
+export default function Home({ data }) {
 
-	const [selected, setSelected] = useState("TAB1");
+	console.log(data)
+
+	const [selected, setSelected] = useState("TAB1"); 
 
 	const onSelected = (selected) => {
 		setSelected(selected)
@@ -18,9 +20,20 @@ export default function Home() {
 			<Header />
 			<Stack h="100%" w="100%" maxW="container.xl" bg="whiteAlpha.800" align="center">
 				<Tabs selected={selected} onSelect={ onSelected }/>
-				<ContentPanel selectedTemplate={selected}/>
+				<ContentPanel selectedTemplate={selected} data={data}/>
 			</Stack>
 			<Footer />
 		</Flex>
 	);
 }
+
+
+
+export async function getServerSideProps() {
+	// Fetch data from external API
+	const res = await fetch(`http://localhost:3000/api/main`)
+	const data = await res.json()
+  
+	// Pass data to the page via props
+	return { props: { data } }
+  }
