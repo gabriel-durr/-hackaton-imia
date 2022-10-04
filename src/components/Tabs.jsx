@@ -25,10 +25,12 @@ export const Tabs = ({
 				width="20rem"
 				height="100%"
 				bg={selected == "TAB1" ? "#9c0c0c" : "#0a5779"}
-				_hover={{
-					filter: "brightness(1.1)",
-					transition: ".4s ease",
-				}}
+				_hover={
+					selected == "TAB1" && {
+						filter: "brightness(1)",
+						transition: ".4s ease",
+					}
+				}
 				_after={
 					selected == "TAB1" && {
 						content: "''",
@@ -61,10 +63,12 @@ export const Tabs = ({
 				width="20rem"
 				height="100%"
 				bg={selected == "TAB2" ? "#9c0c0c" : "#0a5779"}
-				_hover={{
-					filter: "brightness(1.1)",
-					transition: ".4s ease",
-				}}
+				_hover={
+					selected == "TAB2" && {
+						filter: "brightness(1)",
+						transition: ".4s ease",
+					}
+				}
 				_after={
 					selected == "TAB2" && {
 						content: "''",
@@ -97,10 +101,12 @@ export const Tabs = ({
 				width="20rem"
 				height="100%"
 				bg={selected == "TAB3" ? "#9c0c0c" : "#0a5779"}
-				_hover={{
-					filter: "brightness(1.1)",
-					transition: ".4s ease",
-				}}
+				_hover={
+					selected == "TAB3" && {
+						filter: "brightness(1)",
+						transition: ".4s ease",
+					}
+				}
 				_after={
 					selected == "TAB3" && {
 						content: "''",
