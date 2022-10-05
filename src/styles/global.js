@@ -31,37 +31,36 @@ const styles = {
 		"*::placeholder": {
 			color: "gray.500",
 		},
-		".drop-area":{
+		".drop-area": {
 			display: "flex",
 			alignItems: "center",
 			justifyContent: "center",
 			width: "15em",
 			height: "5em",
-			border: "1px #000 dashed"
+			border: "1px #000 dashed",
 		},
 		".drag-app": {
 			display: "flex",
 			alignItems: "center",
-			justifyContent: "center"
+			justifyContent: "center",
 		},
 		"list-container": {
 			display: "flex",
 			fontSize: "10px",
-			flexDirection: "column"
+			flexDirection: "column",
 		},
 		".list-container": {
 			display: "flex",
 			fontSize: "18px",
 			flexDirection: "column",
-			
 		},
 		".item-container": {
 			diplay: "flex",
-			textAlign:"center",
+			textAlign: "center",
 			border: "1px #000 solid",
 			padding: "15px 30px",
-			margin: "5px 10px"
-		}
+			margin: "5px 10px",
+		},
 	},
 };
 
@@ -77,6 +76,13 @@ export const colors = {
 		200: "#DEE2E6",
 		100: "#E9ECEF",
 		50: "#dad9d6",
+	},
+	mia: {
+		50: "#00232f",
+		100: "#034d72",
+		200: "#0F1B31",
+		300: "#20879a",
+		400: "#e0245e",
 	},
 };
 
