@@ -45,27 +45,9 @@ export default function Home({data}) {
 				/>
 				<ContentPanel
 					selectedTemplate={selected}
-					tab3={
-						<Tab3Template
-							data1={data.data1}
-							data2={data.data2}
-							data3={data.data3}
-						/>
-					}
-					tab2={
-						<Tab3Template
-							data1={data.data1}
-							data2={data.data2}
-							data3={data.data3}
-						/>
-					}
-					tab1={
-						<Tab3Template
-							data1={data.data1}
-							data2={data.data2}
-							data3={data.data3}
-						/>
-					}
+					tab3={<Tab3Template data={data.graph} />}
+					tab2={<Tab3Template data={data.graph} />}
+					tab1={<Tab3Template data={data.graph} />}
 				/>
 			</Stack>
 			<Footer />
