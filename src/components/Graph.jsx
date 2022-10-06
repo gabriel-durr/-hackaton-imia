@@ -1,5 +1,11 @@
 import {useEffect, useState} from "react";
-import {Box} from "@chakra-ui/react";
+import {
+	Alert,
+	AlertIcon,
+	AlertTitle,
+	AlertDescription,
+	Box,
+} from "@chakra-ui/react";
 
 import dynamic from "next/dynamic";
 // Correction error Reference self is not defined ...
@@ -9,35 +15,55 @@ const Plot = dynamic(() => import("react-plotly.js"), {
 
 export const Graph = ({data}) => {
 	const [update, setUpdate] = useState([]);
+	const [labels, setLabels] = useState(null);
+	const [showAlert, setShowAlert] = useState(false);
 
 	useEffect(() => {
-		setUpdate([...data]);
+		setUpdate([...initGraph(data)]);
+		setLabels(data[data.length - 1]);
 	}, []);
 
 	var graph = [];
+
+	//init data graph
+	const initGraph = data => {
+		data.forEach((d, i) => {
+			if (i === data.length - 1) {
+				data[i].lineColor = "red";
+				data[i].limiarColor = "orange";
+			}
+		});
+		return data;
+	};
 
 	//show line on hover
 	const onHoverGraph = (data, curvedNumber) => {
 		data.forEach((d, i) => {
 			if (i === curvedNumber) {
 				data[curvedNumber].lineColor = "red";
+				data[curvedNumber].limiarColor = "orange";
 			} else if (i !== curvedNumber) {
 				data[i].lineColor = "transparent";
+				data[i].limiarColor = "transparent";
 			}
 		});
 
 		setUpdate([...data]);
 	};
-	//hide line on hover
-	const onUnhoverGraph = (data, pointNumber) => {
-		data[pointNumber].lineColor = "transparent";
 
-		setUpdate([...data]);
+	//create hover data template
+	const createHoverLabels = (hoverLabels, hoverValues, limiar) => {
+		var text = "<br>";
+		hoverLabels.forEach((label, i) => {
+			text =
+				text +
+				`${label}: ${hoverValues[label]} Limiar: ${limiar[i]}<br>`;
+		});
+		return text;
 	};
 
 	//create graph of converted pointers
 	update.forEach((element, i) => {
-		console.log(element);
 		graph.push({
 			id: "points",
 			x: element.x,
@@ -45,7 +71,7 @@ export const Graph = ({data}) => {
 			z: element.z,
 			type: "scatter3d",
 			mode: "markers+lines",
-			//title: element.label,
+			text: element.hoverLabels,
 			marker: {
 				color: "blue",
 				opacity: 0.7,
@@ -56,11 +82,11 @@ export const Graph = ({data}) => {
 			},
 			showlegend: false,
 			hovertemplate: `<b>Data da coleta: %{x}</b>
-			<br>
-			${element.hoverLabels.map((label, i) => {
-				return `${label}: ${element.hoverValues[label]}<br>`;
-			})}
-			Limiar: ${element.limiar}`,
+			${createHoverLabels(
+				element.hoverLabels,
+				element.hoverValues,
+				element.limiarData
+			)}`,
 			hoverlabel: {
 				bgcolor: "#FFF",
 			},
@@ -75,45 +101,70 @@ export const Graph = ({data}) => {
 			y: element.limiarY,
 			z: element.limiarZ,
 			type: "scatter3d",
-			mode: "markers",
+			mode: "markers+lines",
 			marker: {
 				color: "orange",
 				opacity: 0.7,
+			},
+			line: {
+				color: element.limiarColor,
+				width: 7,
+			},
+			hovertemplate: `<b>Data da coleta: %{x}</b>
+			${createHoverLabels(
+				element.hoverLabels,
+				element.hoverValues,
+				element.limiarData
+			)}`,
+			hoverlabel: {
+				bgcolor: "#FFF",
 			},
 			showlegend: false,
 		});
 	});
 
-	// update &&
-	// 	graph.push({
-	// 		x: update[0].limiarX,
-	// 		y: update[0].limiarY,
-	// 		z: update[0].limiarZ,
-	// 		type: "scatter3d",
-	// 		mode: "lines+text",
-	// 		line: {
-	// 			color: "red",
-	// 			width: 7,
-	// 		},
-	// 		text: {
-	// 			font_size: 50,
-	// 			font_family: "Rockwell",
-	// 		},
-	// 		text: [...update[0].hoverLabels],
-	// 		showlegend: false,
-	// 		hoverlabel: {
-	// 			display: "none",
-	// 		},
-	// 	});
+	//Creating labels
+	labels &&
+		graph.push({
+			x: labels.limiarX,
+			y: labels.limiarY,
+			z: labels.limiarZ,
+			type: "scatter3d",
+			mode: "text",
+			text: {
+				font_size: 50,
+				font_family: "Rockwell",
+			},
+			text: [...labels.hoverLabels],
+			showlegend: false,
+			hovertemplate: `<b>Data da coleta: %{x}</b>
+			${createHoverLabels(
+				labels.hoverLabels,
+				labels.hoverValues,
+				labels.limiarData
+			)}`,
+			hoverlabel: {
+				bgcolor: "#FFF",
+			},
+		});
 
 	return (
 		<Box>
+			{showAlert && (
+				<Alert status="success" position="relative">
+					<AlertIcon />
+					<AlertTitle>Evento onClick:</AlertTitle>
+					<AlertDescription></AlertDescription>
+				</Alert>
+			)}
 			<Plot
 				divId="myChart"
 				data={graph}
 				layout={{width: 800, height: 800, title: "3d graph"}}
 				onClick={event => {
-					// console.log(event);
+					console.log("click");
+					setShowAlert(true);
+					setInterval(() => setShowAlert(false), 3000);
 				}}
 				onHover={event => {
 					if (event.points[0].data.id === "points") {
@@ -123,15 +174,6 @@ export const Graph = ({data}) => {
 						}, 50);
 					}
 				}}
-				// onUnhover={event => {
-				// 	if (event.points[0].data.id === "points") {
-				// 		console.log("unhover => ", event.points[0]);
-				// 		setTimeout(() => {
-				// 			console.log("entrei2");
-				// 			onUnhoverGraph(update, event.points[0].curveNumber);
-				// 		}, 50);
-				// 	}
-				// }}
 			/>
 		</Box>
 	);

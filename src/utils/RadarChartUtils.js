@@ -46,7 +46,7 @@ export const Unpack = (row, labels) => {
 		var lY = [];
 		var lZ = [];
 		var values = {};
-		var limiar = 0;
+		var limiar = [];
 
 		labels.forEach((label, i) => {
 			arrX.push(element);
@@ -56,7 +56,7 @@ export const Unpack = (row, labels) => {
 			lY.push(row[0][label].Limiar * (template.y[i] / 1000));
 			lZ.push(row[0][label].Limiar * (template.z[i] / 1000));
 			values[label] = row[0][label].Dados[element];
-			limiar = row[0][label].Limiar;
+			limiar.push(row[0][label].Limiar);
 		});
 
 		arrX.push(arrX[0]);
@@ -76,8 +76,9 @@ export const Unpack = (row, labels) => {
 			limiarX: lX,
 			limiarY: lY,
 			limiarZ: lZ,
-			limiar: limiar,
+			limiarData: limiar,
 			lineColor: "transparent",
+			limiarColor: "transparent",
 		});
 	});
 
