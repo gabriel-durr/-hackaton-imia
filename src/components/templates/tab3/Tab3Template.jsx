@@ -4,7 +4,7 @@ import {Flex} from "@chakra-ui/react";
 import {Frequency} from "../../../components/Frequency";
 import {Graph} from "../../../components/Graph";
 
-export const Tab3Template = ({data1, data2, data3}) => {
+export const Tab3Template = ({data}) => {
 	const [frequency, setFrequency] = useState("MES");
 
 	return (
@@ -16,7 +16,7 @@ export const Tab3Template = ({data1, data2, data3}) => {
 			margin="15px"
 			direction="column">
 			<Frequency selected={frequency} onSelect={setFrequency} />
-			<Graph data1={data1} data2={data2} data3={data3} />
+			<Graph data={data} />
 		</Flex>
 	);
 };
