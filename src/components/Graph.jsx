@@ -160,7 +160,12 @@ export const Graph = ({data}) => {
 			<Plot
 				divId="myChart"
 				data={graph}
-				layout={{width: 800, height: 800, title: "3d graph"}}
+				layout={{
+					width: 800,
+					height: 800,
+					title: "3d graph",
+					uirevision: true,
+				}}
 				onClick={event => {
 					console.log("click");
 					setShowAlert(true);
