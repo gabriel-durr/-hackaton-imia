@@ -1,5 +1,9 @@
-import {Flex} from "@chakra-ui/react";
+import {Flex, Text} from "@chakra-ui/react";
 
 export const Status = () => {
-	return <Flex>Status</Flex>;
+	return (
+		<Flex>
+			<Text> Status</Text>
+		</Flex>
+	);
 };
