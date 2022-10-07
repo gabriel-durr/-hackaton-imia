@@ -3,9 +3,10 @@ import {useState} from "react";
 import {Footer} from "../components/Footer";
 import {Header} from "../components/Header";
 
-import {DataTemplate} from "../components/templates/tab1/DataTemplate";
-import {ProceduresTemplate} from "../components/templates/tab1/ProceduresTemplate";
-import {StatusTemplate} from "../components/templates/tab1/StatusTemplate";
+import {Forms} from "../components/templates/tab1/Forms";
+import {Status} from "../components/templates/tab1/status";
+import {Actions} from "../components/templates/tab1/Actions";
+
 import {ContentPanel} from "../components/ContentPanel";
 
 import {Tabs} from "../components/Tabs";
@@ -46,9 +47,9 @@ export default function Form({data}) {
 				/>
 				<ContentPanel
 					selectedTemplate={selected}
-					tab1={<DataTemplate data={data.dataObject} />}
-					tab2={<StatusTemplate />}
-					tab3={<ProceduresTemplate />}
+					tab1={<Forms data={data.dataObject} />}
+					tab2={<Status />}
+					tab3={<Actions />}
 				/>
 			</Stack>
 			<Footer />
