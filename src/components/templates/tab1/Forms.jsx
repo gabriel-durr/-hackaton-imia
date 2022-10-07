@@ -1,12 +1,15 @@
-import React, {useState} from "react";
-import {Flex, Button, Text, Input} from "@chakra-ui/react";
+import {useState} from "react";
+import {Flex, Button, Text, Stack, VStack, useToast} from "@chakra-ui/react";
 import {Dropzone} from "../../../utils/Dropzone";
 import {DraggableList} from "../../../utils/DraggableList";
+import {EditableItem} from "../../../utils/EditableItem";
 
 export const Forms = ({data}) => {
-	const [title, setTitle] = useState("");
+	const [title, setTitle] = useState("List Title");
 	const [hasFile, setHasFile] = useState(false);
 	const [keysList, setKeysList] = useState([]);
+	const [isLoading, setIsloading] = useState(false);
+	const toast = useToast();
 
 	const onHandleKeys = async () => {
 		if (hasFile) {
@@ -14,60 +17,92 @@ export const Forms = ({data}) => {
 		}
 	};
 
+	const handleSaveList = async () => {
+		// console.log(title, keysList);
+		setIsloading(true);
+		await new Promise(resolve => setTimeout(resolve, 2000));
+		setIsloading(false);
+		toast({
+			title: "Saved successfully! 🎉🎉",
+			position: "top",
+			description: "Your list has been saved in our database",
+			status: "success",
+			duration: 9000,
+			isClosable: true,
+		});
+	};
+
+	console.log(isLoading);
+
 	return (
 		<Flex
-			align="flex-start"
+			pos="relative"
+			align="center"
+			overflow="hidden"
+			p="1rem"
+			gap="20"
+			flexDir="column"
 			px="2rem"
-			justify="center"
 			margin="15px"
-			direction="column">
-			<Text
-				fontSize="1.5rem"
-				fontWeight="bold"
-				as="span"
-				color="#000"
-				ml="5px">
-				Titulo
-			</Text>
-			<Input
-				type="text"
-				border="1px #000 solid"
-				value={title}
-				onChange={e => setTitle(e.target.value)}
-			/>
-			<Flex direction="row" align="center" py="1em">
-				<Dropzone onHandleDrag={setHasFile} />
-				{hasFile && (
+			bg="#f7fcfd"
+			w="100%"
+			h="100%">
+			<VStack pos="absolute" right="4" top="12" zIndex="7">
+				{!!keysList.length && (
 					<Button
-						variant="outline"
-						flexDirection="column"
-						width="15em"
-						height="5em"
-						bg="#0a5779"
-						marginLeft="10px"
-						_hover={{
-							bg: "#5e8a9c56",
-							transition: ".4s ease",
-						}}
-						onClick={() => onHandleKeys()}>
-						<Text
-							fontSize="1.09rem"
-							as="span"
-							color="#fff"
-							ml="5px"
-							fontWeight="thin">
-							Import document
-						</Text>
+						pos="absolute"
+						left="-530"
+						colorScheme="cyan"
+						loadingText="Saving"
+						isLoading={isLoading}
+						onClick={() => handleSaveList()}
+						color="#fff"
+						top="4"
+						w="100px"
+						h="37px"
+						fontWeight="bold">
+						Save
 					</Button>
 				)}
-			</Flex>
-			<Flex
-				direction="row"
-				justifyContent="space-between"
-				w="40em"
-				alignItems="flex-end">
-				<DraggableList list={keysList} setItemList={setKeysList} />
-			</Flex>
+
+				{hasFile && !keysList.length && (
+					<Button
+						variant="outline"
+						fontSize="1.09rem"
+						color="pink.200"
+						fontWeight="thin"
+						w="10rem"
+						h="3rem"
+						bg="#0a5779"
+						_hover={{
+							transition: ".4s ease",
+							filter: "opacity(.9)",
+						}}
+						onClick={() => onHandleKeys()}>
+						Get Keys
+					</Button>
+				)}
+				<Dropzone
+					onHandleDrag={setHasFile}
+					setKeysList={setKeysList}
+					keysList={keysList}
+				/>
+			</VStack>
+			<Stack align="center" spacing="12" w="100%" pos="relative">
+				<EditableItem value={title} setValue={setTitle} />
+				<VStack
+					align="center"
+					w="100%"
+					h="400px"
+					overflow="scroll"
+					sx={{
+						"&::-webkit-scrollbar": {
+							width: "0px",
+						},
+					}}>
+					<DraggableList list={keysList} setItemList={setKeysList} />
+				</VStack>
+			</Stack>
 		</Flex>
 	);
 };

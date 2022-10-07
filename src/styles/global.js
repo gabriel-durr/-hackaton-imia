@@ -31,36 +31,6 @@ const styles = {
 		"*::placeholder": {
 			color: "gray.500",
 		},
-		".drop-area": {
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			width: "15em",
-			height: "5em",
-			border: "1px #000 dashed",
-		},
-		".drag-app": {
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-		},
-		"list-container": {
-			display: "flex",
-			fontSize: "10px",
-			flexDirection: "column",
-		},
-		".list-container": {
-			display: "flex",
-			fontSize: "18px",
-			flexDirection: "column",
-		},
-		".item-container": {
-			diplay: "flex",
-			textAlign: "center",
-			border: "1px #000 solid",
-			padding: "15px 30px",
-			margin: "5px 10px",
-		},
 	},
 };
 
