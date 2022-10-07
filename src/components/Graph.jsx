@@ -51,7 +51,7 @@ export const Graph = ({data}) => {
 
 	var graph = [];
 
-	//init data graph
+	//init data graph.
 	const initGraph = data => {
 		data.forEach((d, i) => {
 			if (i === data.length - 1) {
