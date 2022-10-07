@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Flex, Button, Text, Stack, VStack, useToast} from "@chakra-ui/react";
+import {Flex, Button, Stack, VStack, useToast} from "@chakra-ui/react";
 import {Dropzone} from "../../../utils/Dropzone";
 import {DraggableList} from "../../../utils/DraggableList";
 import {EditableItem} from "../../../utils/EditableItem";
@@ -31,8 +31,6 @@ export const Forms = ({data}) => {
 			isClosable: true,
 		});
 	};
-
-	console.log(isLoading);
 
 	return (
 		<Flex

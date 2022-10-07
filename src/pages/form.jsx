@@ -4,7 +4,7 @@ import {Footer} from "../components/Footer";
 import {Header} from "../components/Header";
 
 import {Forms} from "../components/templates/tab1/Forms";
-import {Status} from "../components/templates/tab1/status";
+// import {Status} from "../components/templates/tab1/status";
 import {Actions} from "../components/templates/tab1/Actions";
 
 import {ContentPanel} from "../components/ContentPanel";
@@ -48,7 +48,7 @@ export default function Form({data}) {
 				<ContentPanel
 					selectedTemplate={selected}
 					tab1={<Forms data={data.dataObject} />}
-					tab2={<Status />}
+					// tab2={<Status />}
 					tab3={<Actions />}
 				/>
 			</Stack>
