@@ -1,5 +1,7 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Flex, Stack} from "@chakra-ui/react";
+
+import axios from "axios";
 
 import {Footer} from "../components/Footer";
 import {Header} from "../components/Header";
@@ -57,8 +59,9 @@ export default function Home({data}) {
 
 export async function getServerSideProps() {
 	// Fetch data from external API
-	const res = await fetch(`http://localhost:3000/api/main`);
-	const data = await res.json();
+	let data = await axios
+		.get(`https://hackaton-imia.vercel.app/api/main`)
+		.then(res => res.data);
 
 	// Pass data to the page via props
 	return {props: {data}};
