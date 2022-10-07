@@ -21,14 +21,20 @@ const Plot = dynamic(() => import("react-plotly.js"), {
 });
 
 export const Graph = ({data}) => {
-	const [update, setUpdate] = useState([]);
-	const [labels, setLabels] = useState(null);
 	const {isOpen, onOpen, onClose} = useDisclosure();
 	const [event, setEvent] = useState(null);
 
+	const [points, setPoints] = useState([]);
+	const [limiar, setLimiar] = useState([]);
+	const [labels, setLabels] = useState([]);
+	const [actualPoint, setActualPoint] = useState(data.dataGraph.length - 1);
+
+	var graph = [];
+
 	useEffect(() => {
-		setUpdate([...initGraph(data)]);
-		setLabels(data[data.length - 1]);
+		setPoints([...initPointsGraph(data.dataGraph)]);
+		setLimiar([...initLimiarGraph(data.limiarGraph)]);
+		setLabels([...data.labels]);
 	}, []);
 
 	const createFrameText = frame => {
@@ -49,135 +55,46 @@ export const Graph = ({data}) => {
 		}
 	};
 
-	var graph = [];
-
 	//init data graph
-	const initGraph = data => {
-		data.forEach((d, i) => {
-			if (i === data.length - 1) {
-				data[i].lineColor = "red";
-				data[i].limiarColor = "orange";
-			}
-		});
+	const initPointsGraph = data => {
+		data[data.length - 1].line.color = "red";
+
+		return data;
+	};
+
+	const initLimiarGraph = data => {
+		data[data.length - 1].line.color = "orange";
+
 		return data;
 	};
 
 	//show line on hover
-	const onHoverGraph = (data, curvedNumber) => {
-		data.forEach((d, i) => {
-			if (i === curvedNumber) {
-				data[curvedNumber].lineColor = "red";
-				data[curvedNumber].limiarColor = "orange";
-			} else if (i !== curvedNumber) {
-				data[i].lineColor = "transparent";
-				data[i].limiarColor = "transparent";
-			}
-		});
+	const onHoverGraph = (dataGraph, dataLimiar, curvedNumber) => {
+		if (actualPoint !== curvedNumber) {
+			console.log("entrei");
+			dataGraph.forEach((element, i) => {
+				if (i === curvedNumber) {
+					element.line.color = "red";
+				} else {
+					element.line.color = "transparent";
+				}
+			});
+			dataLimiar.forEach((element, i) => {
+				if (i === curvedNumber) {
+					element.line.color = "orange";
+				} else {
+					element.line.color = "transparent";
+				}
+			});
 
-		setUpdate([...data]);
+			setActualPoint(curvedNumber);
+		}
+
+		setPoints([...dataGraph]);
+		setLimiar([...dataLimiar]);
 	};
 
-	//create hover data template
-	const createHoverLabels = (hoverLabels, hoverValues, limiar) => {
-		var text = "<br>";
-		hoverLabels.forEach((label, i) => {
-			text =
-				text +
-				`${label}: ${hoverValues[label]} Limiar: ${limiar[i]}<br>`;
-		});
-		return text;
-	};
-
-	//create graph of converted pointers
-	update.forEach((element, i) => {
-		graph.push({
-			id: "points",
-			frame: element,
-			x: element.x,
-			y: element.y,
-			z: element.z,
-			type: "scatter3d",
-			mode: "markers+lines",
-			text: element.hoverLabels,
-			marker: {
-				color: "blue",
-				opacity: 0.7,
-			},
-			line: {
-				color: element.lineColor,
-				width: 7,
-			},
-			showlegend: false,
-			hovertemplate: `<b>Data da coleta: %{x}</b>
-			${createHoverLabels(
-				element.hoverLabels,
-				element.hoverValues,
-				element.limiarData
-			)}`,
-			hoverlabel: {
-				bgcolor: "#FFF",
-			},
-		});
-	});
-
-	//create limiar graph
-	update.forEach(element => {
-		graph.push({
-			id: "limiar",
-			frame: element,
-
-			x: element.limiarX,
-			y: element.limiarY,
-			z: element.limiarZ,
-			type: "scatter3d",
-			mode: "markers+lines",
-			marker: {
-				color: "orange",
-				opacity: 0.7,
-			},
-			line: {
-				color: element.limiarColor,
-				width: 7,
-			},
-			hovertemplate: `<b>Data da coleta: %{x}</b>
-			${createHoverLabels(
-				element.hoverLabels,
-				element.hoverValues,
-				element.limiarData
-			)}`,
-			hoverlabel: {
-				bgcolor: "#FFF",
-			},
-			showlegend: false,
-		});
-	});
-
-	//Creating labels
-	labels &&
-		graph.push({
-			id: "Label",
-			frame: labels,
-			x: labels.limiarX,
-			y: labels.limiarY,
-			z: labels.limiarZ,
-			type: "scatter3d",
-			mode: "text",
-			text: {
-				font_size: 50,
-				font_family: "Rockwell",
-			},
-			text: [...labels.hoverLabels],
-			showlegend: false,
-			hovertemplate: `<b>Data da coleta: %{x}</b>
-			${createHoverLabels(
-				labels.hoverLabels,
-				labels.hoverValues,
-				labels.limiarData
-			)}`,
-			hoverlabel: {
-				bgcolor: "#FFF",
-			},
-		});
+	var graph = [...points, ...limiar, ...labels];
 
 	return (
 		<Box>
@@ -196,7 +113,11 @@ export const Graph = ({data}) => {
 				onHover={event => {
 					if (event.points[0].data.id === "points") {
 						setTimeout(() => {
-							onHoverGraph(update, event.points[0].curveNumber);
+							onHoverGraph(
+								points,
+								limiar,
+								event.points[0].curveNumber
+							);
 						}, 50);
 					}
 				}}
