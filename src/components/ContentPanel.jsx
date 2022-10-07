@@ -1,5 +1,4 @@
 import {Flex} from "@chakra-ui/react";
-import {MdOutlineAccountCircle} from "react-icons/md";
 
 export const ContentPanel = ({selectedTemplate, tab1, tab2, tab3}) => {
 	const Template = ({selected}) => {

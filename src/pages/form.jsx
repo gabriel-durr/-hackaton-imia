@@ -1,11 +1,14 @@
 import {Flex, Stack} from "@chakra-ui/react";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Footer} from "../components/Footer";
 import {Header} from "../components/Header";
 
-import {DataTemplate} from "../components/templates/tab1/DataTemplate";
-import {ProceduresTemplate} from "../components/templates/tab1/ProceduresTemplate";
-import {StatusTemplate} from "../components/templates/tab1/StatusTemplate";
+import axios from "axios";
+
+import {Forms} from "../components/templates/tab1/Forms";
+// import {Status} from "../components/templates/tab1/status";
+// import {Actions} from "../components/templates/tab1/Actions";
+
 import {ContentPanel} from "../components/ContentPanel";
 
 import {Tabs} from "../components/Tabs";
@@ -46,19 +49,19 @@ export default function Form({data}) {
 				/>
 				<ContentPanel
 					selectedTemplate={selected}
-					tab1={<DataTemplate data={data.dataObject} />}
-					tab2={<StatusTemplate />}
-					tab3={<ProceduresTemplate />}
+					tab1={<Forms data={data.dataObject} />}
+					// tab2={<Status />}
+					// tab3={<Actions />}
 				/>
 			</Stack>
 			<Footer />
 		</Flex>
 	);
 }
+
 export async function getServerSideProps() {
 	// Fetch data from external API
-	const res = await fetch(`http://localhost:3000/api/main`);
-	const data = await res.json();
+	let data = await axios.get(process.env.URL_API).then(res => res.data);
 
 	// Pass data to the page via props
 	return {props: {data}};
