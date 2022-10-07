@@ -1,10 +1,17 @@
 import {useEffect, useState} from "react";
 import {
-	Alert,
-	AlertIcon,
-	AlertTitle,
-	AlertDescription,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	ModalBody,
+	ModalCloseButton,
 	Box,
+	useDisclosure,
+	Text,
+	Textarea,
+	Button,
 } from "@chakra-ui/react";
 
 import dynamic from "next/dynamic";
@@ -16,12 +23,31 @@ const Plot = dynamic(() => import("react-plotly.js"), {
 export const Graph = ({data}) => {
 	const [update, setUpdate] = useState([]);
 	const [labels, setLabels] = useState(null);
-	const [showAlert, setShowAlert] = useState(false);
+	const {isOpen, onOpen, onClose} = useDisclosure();
+	const [event, setEvent] = useState(null);
 
 	useEffect(() => {
 		setUpdate([...initGraph(data)]);
 		setLabels(data[data.length - 1]);
 	}, []);
+
+	const createFrameText = frame => {
+		var text = [`Data da coleta: ${frame.x[0]}\n`];
+		frame.hoverLabels.forEach((label, i) => {
+			text.push(
+				`${label}: ${frame.hoverValues[label]} - Limiar: ${frame.limiarData[i]}\n`
+			);
+		});
+		return text;
+	};
+
+	const onHandleModal = events => {
+		if (!isOpen) {
+			var modalText = createFrameText(events.points[0].data.frame);
+			setEvent(modalText);
+			onOpen();
+		}
+	};
 
 	var graph = [];
 
@@ -66,6 +92,7 @@ export const Graph = ({data}) => {
 	update.forEach((element, i) => {
 		graph.push({
 			id: "points",
+			frame: element,
 			x: element.x,
 			y: element.y,
 			z: element.z,
@@ -97,6 +124,8 @@ export const Graph = ({data}) => {
 	update.forEach(element => {
 		graph.push({
 			id: "limiar",
+			frame: element,
+
 			x: element.limiarX,
 			y: element.limiarY,
 			z: element.limiarZ,
@@ -126,6 +155,8 @@ export const Graph = ({data}) => {
 	//Creating labels
 	labels &&
 		graph.push({
+			id: "Label",
+			frame: labels,
 			x: labels.limiarX,
 			y: labels.limiarY,
 			z: labels.limiarZ,
@@ -150,31 +181,54 @@ export const Graph = ({data}) => {
 
 	return (
 		<Box>
-			{showAlert && (
-				<Alert status="success" position="relative">
-					<AlertIcon />
-					<AlertTitle>Evento onClick:</AlertTitle>
-					<AlertDescription></AlertDescription>
-				</Alert>
-			)}
 			<Plot
 				divId="myChart"
 				data={graph}
-				layout={{width: 800, height: 800, title: "3d graph"}}
+				layout={{
+					width: 800,
+					height: 800,
+					title: "3d graph",
+					uirevision: true,
+				}}
 				onClick={event => {
-					console.log("click");
-					setShowAlert(true);
-					setInterval(() => setShowAlert(false), 3000);
+					onHandleModal(event);
 				}}
 				onHover={event => {
 					if (event.points[0].data.id === "points") {
-						console.log("event ==> ", event);
 						setTimeout(() => {
 							onHoverGraph(update, event.points[0].curveNumber);
 						}, 50);
 					}
 				}}
 			/>
+			<Modal isOpen={isOpen} onClose={onClose}>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>Dados do evento</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody>
+						{event &&
+							event.map((e, i) => {
+								return <Text key={i}>{e}</Text>;
+							})}
+						<Text marginTop="10px" fontWeight="bold">
+							Observações:
+						</Text>
+						<Textarea
+							size="sm"
+							placeholder="Coloque aqui suas observações ..."
+						/>
+					</ModalBody>
+					<ModalFooter>
+						<Button colorScheme="blue" mr={3} onClick={onClose}>
+							Send
+						</Button>
+						<Button colorScheme="red" mr={3} onClick={onClose}>
+							Close
+						</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
 		</Box>
 	);
 };
