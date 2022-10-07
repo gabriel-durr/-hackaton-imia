@@ -57,7 +57,7 @@ export default function Home({data}) {
 	);
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	// Fetch data from external API
 	let data = await axios.get(process.env.URL_API).then(res => res.data);
 
