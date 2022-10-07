@@ -1,0 +1,20 @@
+{
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.tabWidth": 4,
+    "editor.inlineSuggest.enabled": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "workbench.editor.untitled.hint": "hidden",
+    "files.associations": {
+        "*.md": "markdown"
+    },
+    "prettier.jsxBracketSameLine": true,
+        "prettier.useTabs": true,
+        "prettier.arrowParens": "avoid",
+    "prettier.bracketSpacing": false,
+}

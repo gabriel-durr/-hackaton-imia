@@ -28,6 +28,7 @@ export const Graph = ({data}) => {
 	const [limiar, setLimiar] = useState([]);
 	const [labels, setLabels] = useState([]);
 	const [actualPoint, setActualPoint] = useState(data.dataGraph.length - 1);
+	const [canHover, setCanHover] = useState(true);
 
 	var graph = [];
 
@@ -108,6 +109,7 @@ export const Graph = ({data}) => {
 					uirevision: true,
 				}}
 				onClick={event => {
+					// setCanHover(false);
 					onHandleModal(event);
 				}}
 				onHover={event => {
