@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useState} from "react";
 import {useDropzone} from "react-dropzone";
-import {Box, IconButton, Input, Text, VStack} from "@chakra-ui/react";
+import {Box, IconButton, Input, Text, VStack, Icon} from "@chakra-ui/react";
 import {VscGoToFile, VscClearAll} from "react-icons/vsc";
 
 export const Dropzone = ({onHandleDrag, setKeysList, keysList}) => {
@@ -34,46 +34,44 @@ export const Dropzone = ({onHandleDrag, setKeysList, keysList}) => {
 			{keysList.length && (
 				<IconButton
 					pos="absolute"
-					bottom="-12"
-					right="28"
-					size="md"
+					bottom="-16"
+					right="24"
+					size="lg"
 					color="red.400"
 					onClick={() => handleClear()}
 					icon={<VscClearAll />}
 				/>
 			)}
 
-			<Box {...getRootProps({className: "dropzone"})}>
+			<Box
+				{...getRootProps({className: "dropzone"})}
+				rounded="lg"
+				cursor="pointer"
+				border="2px dotted #898a8a"
+				w="230px"
+				p="12px">
 				<Input className="input-zone" {...getInputProps()} />
 				{isDrag ? (
-					<Box className="drop-area" h="2.5rem" rounded="lg">
-						<IconButton
+					<Box textAlign="left">
+						<Icon
 							pos="absolute"
-							bottom="-12"
-							right={keysList.length ? "16" : "90px"}
+							top={!!keysList.length ? "6" : "4"}
+							right={!!keysList.length ? "1" : "1"}
 							color="cyan.400"
-							size="md"
-							icon={<VscGoToFile />}
+							h="5"
+							w="5"
+							as={VscGoToFile}
 						/>
 
-						<Text className="text-center">
+						<Text>
 							{file.name} - size: {file.size} bytes
 						</Text>
 					</Box>
 				) : (
-					<Box
-						className="drop-area"
-						h="2.5rem"
-						rounded="lg"
-						cursor="cell">
-						<Box className="text-center">
-							<Text
-								className="dropzone-content"
-								color="gray.900"
-								fontWeight="bold">
-								Select a file
-							</Text>
-						</Box>
+					<Box textAlign="center">
+						<Text color="gray.900" fontWeight="bold">
+							Select a file
+						</Text>
 					</Box>
 				)}
 			</Box>

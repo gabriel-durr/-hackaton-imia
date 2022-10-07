@@ -45,19 +45,18 @@ export const Forms = ({data}) => {
 			bg="#f7fcfd"
 			w="100%"
 			h="100%">
-			<VStack pos="absolute" right="4" top="12" zIndex="7">
+			<VStack pos="absolute" right="4" top="36" zIndex="7">
 				{!!keysList.length && (
 					<Button
 						pos="absolute"
-						left="-530"
 						colorScheme="cyan"
 						loadingText="Saving"
 						isLoading={isLoading}
 						onClick={() => handleSaveList()}
 						color="#fff"
-						top="4"
-						w="100px"
-						h="37px"
+						top="80"
+						w="140px"
+						h="42px"
 						fontWeight="bold">
 						Save
 					</Button>

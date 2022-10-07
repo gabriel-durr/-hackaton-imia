@@ -51,7 +51,7 @@ export const EditableItem = ({value, setValue}) => {
 			right="-8"
 			textAlign="center"
 			defaultValue={value}
-			fontSize="2xl"
+			fontSize="3xl"
 			display="flex"
 			gap="7"
 			flexDirection="row"

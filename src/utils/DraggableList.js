@@ -1,5 +1,5 @@
 import {OrderedList, ListItem, IconButton} from "@chakra-ui/react";
-import {DeleteIcon} from "@chakra-ui/icons";
+import {AiOutlineCloseCircle} from "react-icons/ai";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
 export const DraggableList = ({list, setItemList}) => {
@@ -25,6 +25,7 @@ export const DraggableList = ({list, setItemList}) => {
 			<Droppable droppableId="list-container">
 				{(provided, snapshot) => (
 					<OrderedList
+						listStyleType="none"
 						shadow="sm"
 						{...provided.droppableProps}
 						ref={provided.innerRef}>
@@ -36,9 +37,9 @@ export const DraggableList = ({list, setItemList}) => {
 								{(provided, snapshot) => (
 									<>
 										<ListItem
+											p="20px"
 											pos="relative"
 											shadow="lg"
-											listStyleType="none"
 											rounded="lg"
 											color={
 												snapshot.isDragging
@@ -60,10 +61,14 @@ export const DraggableList = ({list, setItemList}) => {
 											{...provided.draggableProps}>
 											{item}
 											<IconButton
-												icon={<DeleteIcon />}
-												color="#fff"
 												pos="absolute"
-												shadow="sm"
+												rounded="full"
+												size="sm"
+												icon={
+													<AiOutlineCloseCircle size="sm" />
+												}
+												color="#fff"
+												shadow="md"
 												_hover={{
 													color: "red.400",
 													transition: ".4s ease",
