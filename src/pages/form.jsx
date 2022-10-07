@@ -61,9 +61,7 @@ export default function Form({data}) {
 
 export async function getServerSideProps() {
 	// Fetch data from external API
-	let data = await axios
-		.get(`https://hackaton-imia.vercel.app/api/main`)
-		.then(res => res.data);
+	let data = await axios.get(process.env.URL_API).then(res => res.data);
 
 	// Pass data to the page via props
 	return {props: {data}};
