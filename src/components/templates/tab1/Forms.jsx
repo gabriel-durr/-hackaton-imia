@@ -36,7 +36,6 @@ export const Forms = ({data}) => {
 		<Flex
 			pos="relative"
 			align="center"
-			overflow="hidden"
 			p="1rem"
 			gap="20"
 			flexDir="column"
@@ -45,7 +44,7 @@ export const Forms = ({data}) => {
 			bg="#f7fcfd"
 			w="100%"
 			h="100%">
-			<VStack pos="absolute" right="4" top="36" zIndex="7">
+			<VStack pos="absolute" right="4" top="2" zIndex="7">
 				{!!keysList.length && (
 					<Button
 						pos="absolute"
@@ -58,11 +57,11 @@ export const Forms = ({data}) => {
 						w="140px"
 						h="42px"
 						fontWeight="bold">
-						Save
+						Salvar
 					</Button>
 				)}
 
-				{hasFile && !keysList.length && (
+				{/* {hasFile && !keysList.length && (
 					<Button
 						variant="outline"
 						fontSize="1.09rem"
@@ -76,29 +75,19 @@ export const Forms = ({data}) => {
 							filter: "opacity(.9)",
 						}}
 						onClick={() => onHandleKeys()}>
-						Get Keys
+						Pegar Chaves
 					</Button>
-				)}
+				)} */}
 				<Dropzone
 					onHandleDrag={setHasFile}
 					setKeysList={setKeysList}
 					keysList={keysList}
+					onHandleKeys={onHandleKeys}
 				/>
 			</VStack>
-			<Stack align="center" spacing="12" w="100%" pos="relative">
+			<Stack align="center" spacing="2" w="100%" h="100%">
 				<EditableItem value={title} setValue={setTitle} />
-				<VStack
-					align="center"
-					w="100%"
-					h="400px"
-					overflow="scroll"
-					sx={{
-						"&::-webkit-scrollbar": {
-							width: "0px",
-						},
-					}}>
-					<DraggableList list={keysList} setItemList={setKeysList} />
-				</VStack>
+				<DraggableList list={keysList} setItemList={setKeysList} />
 			</Stack>
 		</Flex>
 	);

@@ -49,6 +49,7 @@ export const EditableItem = ({value, setValue}) => {
 		<Editable
 			pos="relative"
 			right="-8"
+			top="-2"
 			textAlign="center"
 			defaultValue={value}
 			fontSize="3xl"
