@@ -58,8 +58,6 @@ export const StatusTab = () => {
 		}
 	};
 
-	console.log(data);
-
 	return (
 		<Flex
 			bg="#f7fcfd"
@@ -119,14 +117,16 @@ export const StatusTab = () => {
 								))}
 							</Select>
 						</FormControl>
-						<IconButton
-							color="red.400"
-							_hover={{
-								color: "red",
-							}}
-							icon={<BsFillDashSquareFill />}
-							onClick={() => handleRemoveFormula(qdt)}
-						/>
+						{qdt > 1 && (
+							<IconButton
+								color="red.400"
+								_hover={{
+									color: "red",
+								}}
+								icon={<BsFillDashSquareFill />}
+								onClick={() => handleRemoveFormula(qdt)}
+							/>
+						)}
 					</HStack>
 				))}
 				{data.qdts.map((qdt, index) => (
@@ -143,14 +143,16 @@ export const StatusTab = () => {
 								))}
 							</Select>
 						</FormControl>
-						<IconButton
-							color="red.400"
-							_hover={{
-								color: "red",
-							}}
-							icon={<BsFillDashSquareFill />}
-							onClick={() => handleRemoveData(qdt)}
-						/>
+						{qdt > 1 && (
+							<IconButton
+								color="red.400"
+								_hover={{
+									color: "red",
+								}}
+								icon={<BsFillDashSquareFill />}
+								onClick={() => handleRemoveData(qdt)}
+							/>
+						)}
 					</HStack>
 				))}
 			</VStack>
