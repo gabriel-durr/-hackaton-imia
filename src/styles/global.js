@@ -58,7 +58,7 @@ export const colors = {
 
 const fonts = {
 	heading: "DM Sans, sans-serif",
-	body: "DM Sans, sans-serif",
+	body: "Maven Pro, sans-serif",
 };
 
 const theme = extendTheme({

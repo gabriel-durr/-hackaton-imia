@@ -15,7 +15,7 @@ export default class MyDocument extends Document {
 						crossOrigin="true"
 					/>
 					<link
-						href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+						href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Maven+Pro:wght@400;700&display=swap"
 						rel="stylesheet"
 					/>
 					<link rel="shortcut icon" href="/favicon.png" />
