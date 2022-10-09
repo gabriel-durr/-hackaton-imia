@@ -105,8 +105,11 @@ export const StatusTab = () => {
 				}}>
 				{formula.qdts.map((qdt, index) => (
 					<HStack key={index} align="flex-end">
-						<FormControl w="190px">
-							<FormLabel fontWeight="bold" fontSize="1.2rem">
+						<FormControl w={qdt > 1 ? "190px" : "232px"}>
+							<FormLabel
+								fontWeight="bold"
+								fontSize="1.2rem"
+								borderBottom={qdt > 1 ? "" : "1px solid #000"}>
 								Fórmulas
 							</FormLabel>
 							<Select color="gray.900" w="190px">
@@ -131,8 +134,11 @@ export const StatusTab = () => {
 				))}
 				{data.qdts.map((qdt, index) => (
 					<HStack key={index} align="flex-end">
-						<FormControl w="190px">
-							<FormLabel fontWeight="bold" fontSize="1.2rem">
+						<FormControl w={qdt > 1 ? "190px" : "232px"}>
+							<FormLabel
+								fontWeight="bold"
+								fontSize="1.2rem"
+								borderBottom={qdt > 1 ? "" : "1px solid #000"}>
 								Dados
 							</FormLabel>
 							<Select color="gray.900" w="190px" label="Dados">
