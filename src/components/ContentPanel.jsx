@@ -9,8 +9,6 @@ export const ContentPanel = ({selectedTemplate, tab1, tab2, tab3}) => {
 				return tab2;
 			case "TAB3":
 				return tab3;
-			default:
-				return null;
 		}
 	};
 
@@ -28,7 +26,7 @@ export const ContentPanel = ({selectedTemplate, tab1, tab2, tab3}) => {
 					width: "0px",
 				},
 			}}
-			marginTop="20px"
+			mt="20px"
 			direction="column">
 			<Template selected={selectedTemplate} />
 		</Flex>

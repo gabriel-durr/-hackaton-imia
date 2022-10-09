@@ -5,9 +5,9 @@ import {Header} from "../components/Header";
 
 import axios from "axios";
 
-import {Forms} from "../components/templates/tab1/Forms";
-// import {Status} from "../components/templates/tab1/status";
-// import {Actions} from "../components/templates/tab1/Actions";
+import {FormsTab} from "../components/templates/tab1/FormsTab";
+import {StatusTab} from "../components/templates/tab1/StatusTab";
+import {ActionsTab} from "../components/templates/tab1/ActionsTab";
 
 import {ContentPanel} from "../components/ContentPanel";
 
@@ -49,9 +49,9 @@ export default function Form({data}) {
 				/>
 				<ContentPanel
 					selectedTemplate={selected}
-					tab1={<Forms data={data.dataObject} />}
-					// tab2={<Status />}
-					// tab3={<Actions />}
+					tab1={<FormsTab data={data.dataObject} />}
+					tab2={<StatusTab />}
+					tab3={<ActionsTab />}
 				/>
 			</Stack>
 			<Footer />

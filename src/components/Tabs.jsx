@@ -13,10 +13,11 @@ export const Tabs = ({
 	return (
 		<Flex
 			w="min-content"
+			h="70px"
 			align="flex-start"
 			justify="center"
 			marginTop="12px"
-			h="70px">
+			cursor="pointer">
 			<VStack
 				zIndex="1"
 				pos="relative"

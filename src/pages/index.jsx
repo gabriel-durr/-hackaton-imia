@@ -20,7 +20,6 @@ export default function Home({data}) {
 	const onSelected = selected => {
 		setSelected(selected);
 	};
-
 	return (
 		<Flex
 			w="100vw"
@@ -47,9 +46,9 @@ export default function Home({data}) {
 				/>
 				<ContentPanel
 					selectedTemplate={selected}
-					tab3={<Tab3Template data={data.graphStruct} />}
-					tab2={<Tab3Template data={data.graphStruct} />}
 					tab1={<Tab3Template data={data.graphStruct} />}
+					tab2={<Tab3Template data={data.graphStruct} />}
+					tab3={<Tab3Template data={data.graphStruct} />}
 				/>
 			</Stack>
 			<Footer />

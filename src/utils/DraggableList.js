@@ -8,7 +8,6 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 export const DraggableList = ({list, setItemList, endList, setEndList}) => {
 	const handleDrop = droppedItem => {
 		// Ignore drop outside droppable container
-		console.log(droppedItem);
 
 		if (!droppedItem.destination) return;
 

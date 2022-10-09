@@ -4,7 +4,7 @@ import {Dropzone} from "../../../utils/Dropzone";
 import {DraggableList} from "../../../utils/DraggableList";
 import {EditableItem} from "../../../utils/EditableItem";
 
-export const Forms = ({data}) => {
+export const FormsTab = ({data}) => {
 	const [title, setTitle] = useState("Titulo da Coleção");
 	const [keysList, setKeysList] = useState([]);
 	const [endList, setEndList] = useState([]);
