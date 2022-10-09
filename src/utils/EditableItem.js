@@ -23,11 +23,13 @@ export const EditableItem = ({value, setValue}) => {
 		return isEditing ? (
 			<ButtonGroup justifyContent="center" size="sm">
 				<IconButton
+					aria-label="Ícone Confirmar"
 					color="green.400"
 					icon={<CheckIcon />}
 					{...getSubmitButtonProps()}
 				/>
 				<IconButton
+					aria-label="Ícone Fechar"
 					color="red.400"
 					icon={<CloseIcon />}
 					{...getCancelButtonProps()}
@@ -36,6 +38,7 @@ export const EditableItem = ({value, setValue}) => {
 		) : (
 			<Flex justifyContent="center">
 				<IconButton
+					aria-label="Ícone Editar"
 					color="cyan.400"
 					size="md"
 					icon={<EditIcon />}
@@ -53,6 +56,7 @@ export const EditableItem = ({value, setValue}) => {
 			textAlign="center"
 			defaultValue={value}
 			fontSize="3xl"
+			fontWeight="bold"
 			display="flex"
 			gap="7"
 			flexDirection="row"

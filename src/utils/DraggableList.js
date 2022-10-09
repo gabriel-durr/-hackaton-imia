@@ -1,13 +1,14 @@
-import {HStack, Box, IconButton, VStack} from "@chakra-ui/react";
-import {useState} from "react";
-import {AiOutlineCloseCircle} from "react-icons/ai";
+import {HStack, Box, IconButton, Text, VStack, Image} from "@chakra-ui/react";
+import {motion} from "framer-motion";
+import uuid from "react-uuid";
+
+import {IoMdCloseCircle} from "react-icons/io";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 
-export const DraggableList = ({list, setItemList}) => {
-	const [endList, setEndList] = useState([]);
-
+export const DraggableList = ({list, setItemList, endList, setEndList}) => {
 	const handleDrop = droppedItem => {
 		// Ignore drop outside droppable container
+		console.log(droppedItem);
 
 		if (!droppedItem.destination) return;
 
@@ -67,11 +68,21 @@ export const DraggableList = ({list, setItemList}) => {
 	};
 
 	function removeItemList(item) {
-		const listFiltred = list.filter(value => value != item);
+		const arrList = Array.from(list);
+		const arrEnd = Array.from(endList);
+		const listFiltred = arrList.filter(value => value != item);
 		setItemList(listFiltred);
-		const listFiltred2 = endList.filter(value => value != item);
+		const listFiltred2 = arrEnd.filter(value => value != item);
 		setEndList(listFiltred2);
 	}
+
+	// console.log("item - ", list);
+	// console.log("end - ", endList);
+
+	// [{
+	// 	id: 1212,
+	// 	key: "item"
+	// }]
 
 	return (
 		<DragDropContext onDragEnd={handleDrop}>
@@ -79,15 +90,15 @@ export const DraggableList = ({list, setItemList}) => {
 				{(provided, snapshot) => (
 					<HStack
 						wrap="wrap"
+						w="100%"
 						p="17px"
-						bg="red"
 						shadow="sm"
 						{...provided.droppableProps}
 						ref={provided.innerRef}>
 						{list.map((item, index) => (
 							<Draggable
-								key={item}
-								draggableId={item}
+								key={item.id}
+								draggableId={item.id}
 								index={index}>
 								{(provided, snapshot) => (
 									<Box
@@ -97,31 +108,32 @@ export const DraggableList = ({list, setItemList}) => {
 										shadow="lg"
 										rounded="lg"
 										color="#fff"
-										my="1rem"
+										my="20px"
 										fontSize="1rem"
 										border="none"
 										bg={
 											snapshot.isDragging
-												? "mia.400"
-												: "mia.300"
+												? "blue.400"
+												: "blue.300"
 										}
 										className="item-container"
 										ref={provided.innerRef}
 										{...provided.dragHandleProps}
 										{...provided.draggableProps}>
-										{item}
+										{item.label}
 										<IconButton
 											pos="absolute"
 											rounded="full"
 											size="xs"
-											icon={<AiOutlineCloseCircle />}
-											color="#fff"
+											fontSize="25px"
+											icon={<IoMdCloseCircle />}
+											color="rgba(245, 91, 91, 0.63)"
 											shadow="md"
 											_hover={{
 												color: "red.400",
 												transition: ".4s ease",
 											}}
-											right="2"
+											right="0"
 											variant="unstyled"
 											onClick={() =>
 												removeItemList(item, index)
@@ -138,7 +150,10 @@ export const DraggableList = ({list, setItemList}) => {
 			<Droppable droppableId="droppable2" direction="vertical">
 				{(provided, snapshot) => (
 					<VStack
-						bg="blue.100"
+						pos="relative"
+						border="2px dotted #949494"
+						bg="#f7f7f7"
+						rounded="lg"
 						w="100%"
 						minH="300px"
 						p="20px"
@@ -151,10 +166,40 @@ export const DraggableList = ({list, setItemList}) => {
 						shadow="sm"
 						{...provided.droppableProps}
 						ref={provided.innerRef}>
+						{(endList.length < 1) & !!list.length && (
+							<>
+								<Image
+									w="120px"
+									h="120px"
+									as={motion.img}
+									src="/drag-scroll.svg"
+									alt=""
+									animate={{
+										translateY: -10,
+										opacity: 1,
+										scale: 1.04,
+										transition: {
+											yoyo: Infinity,
+											duration: 1.5,
+										},
+									}}
+								/>
+
+								<Text
+									color="gray.500"
+									fontWeight="hairline"
+									pos="absolute"
+									top="36"
+									fontSize="2xl">
+									Arraste aqui os Itens
+								</Text>
+							</>
+						)}
+
 						{endList.map((item, index) => (
 							<Draggable
-								key={item}
-								draggableId={item}
+								key={item.id}
+								draggableId={item.id}
 								index={index}>
 								{(provided, snapshot) => (
 									<Box
@@ -167,28 +212,29 @@ export const DraggableList = ({list, setItemList}) => {
 										my="1rem"
 										fontSize="1.3rem"
 										border="none"
-										bg={
-											snapshot.isDragging
-												? "mia.400"
-												: "mia.300"
+										bg="blue.400"
+										bgGradient={
+											snapshot.isDragging &&
+											"linear-gradient(90deg, #355c7d 0%, #6c5b7b 50%, #c06c84 100%)"
 										}
 										className="item-container"
 										ref={provided.innerRef}
 										{...provided.dragHandleProps}
 										{...provided.draggableProps}>
-										{item}
+										{item.label}
 										<IconButton
 											pos="absolute"
 											rounded="full"
-											size="xs"
-											icon={<AiOutlineCloseCircle />}
-											color="#fff"
+											size="sm"
+											fontSize="32px"
+											icon={<IoMdCloseCircle />}
+											color="rgba(245, 91, 91, 0.63)"
 											shadow="md"
 											_hover={{
 												color: "red.400",
 												transition: ".4s ease",
 											}}
-											right="2"
+											right="0"
 											variant="unstyled"
 											onClick={() =>
 												removeItemList(item, index)
