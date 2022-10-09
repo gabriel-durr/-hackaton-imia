@@ -76,14 +76,6 @@ export const DraggableList = ({list, setItemList, endList, setEndList}) => {
 		setEndList(listFiltred2);
 	}
 
-	// console.log("item - ", list);
-	// console.log("end - ", endList);
-
-	// [{
-	// 	id: 1212,
-	// 	key: "item"
-	// }]
-
 	return (
 		<DragDropContext onDragEnd={handleDrop}>
 			<Droppable droppableId="droppable" direction="horizontal">
