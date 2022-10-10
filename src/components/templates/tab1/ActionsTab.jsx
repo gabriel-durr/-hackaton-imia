@@ -35,7 +35,7 @@ export const ActionsTab = () => {
 						color="gray.800">
 						Status:
 					</FormLabel>
-					<Select color="gray.900" w="160px" h="30px">
+					<Select color="gray.900" w="170px" h="30px">
 						{process.statusList.map((item, index) => (
 							<option key={index} value={item}>
 								{item}
@@ -50,7 +50,7 @@ export const ActionsTab = () => {
 						color="gray.800">
 						Selecionar Notificação:
 					</FormLabel>
-					<Select color="gray.900" w="200px" h="30px">
+					<Select color="gray.900" w="207px" h="30px">
 						{process.process.map((item, index) => (
 							<option key={index} value={item}>
 								{item}
