@@ -29,7 +29,10 @@ export const ActionsTab = () => {
 
 			<VStack spacing="7">
 				<FormControl display="flex" flexDir="row">
-					<FormLabel fontWeight="bold" fontSize="1.3rem">
+					<FormLabel
+						fontWeight="semibold"
+						fontSize="1.3rem"
+						color="gray.800">
 						Status:
 					</FormLabel>
 					<Select color="gray.900" w="160px" h="30px">
@@ -41,7 +44,10 @@ export const ActionsTab = () => {
 					</Select>
 				</FormControl>
 				<FormControl display="flex" flexDir="row">
-					<FormLabel fontWeight="bold" fontSize="1.3rem">
+					<FormLabel
+						fontWeight="semibold"
+						fontSize="1.3rem"
+						color="gray.800">
 						Selecionar Notificação:
 					</FormLabel>
 					<Select color="gray.900" w="200px" h="30px">
