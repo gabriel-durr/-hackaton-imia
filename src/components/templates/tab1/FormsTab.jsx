@@ -16,6 +16,8 @@ export const FormsTab = ({data}) => {
 		setIsloading(true);
 		await new Promise(resolve => setTimeout(resolve, 2000));
 		setIsloading(false);
+		setEndList([]);
+		setKeysList([]);
 		toast({
 			title: "Sucesso! ",
 			position: "top",

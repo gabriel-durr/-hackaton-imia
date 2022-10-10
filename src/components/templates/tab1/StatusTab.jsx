@@ -112,7 +112,7 @@ export const StatusTab = () => {
 								borderBottom={qdt > 1 ? "" : "1px solid #000"}>
 								Fórmulas
 							</FormLabel>
-							<Select color="gray.900" w="190px">
+							<Select color="gray.900" w="170px" h="30px">
 								{formula.items.map((item, index) => (
 									<option key={index} value={item}>
 										{item}
@@ -141,7 +141,11 @@ export const StatusTab = () => {
 								borderBottom={qdt > 1 ? "" : "1px solid #000"}>
 								Dados
 							</FormLabel>
-							<Select color="gray.900" w="190px" label="Dados">
+							<Select
+								color="gray.900"
+								w="170px"
+								h="30px"
+								label="Dados">
 								{data.items.map((item, index) => (
 									<option key={index} value={item}>
 										{item}
