@@ -4,7 +4,7 @@ import {Dropzone} from "../../../utils/Dropzone";
 import {DraggableList} from "../../../utils/DraggableList";
 import {EditableItem} from "../../../utils/EditableItem";
 
-export const FormsTab = ({data}) => {
+export const FormsTab = ({data, resultList}) => {
 	const [title, setTitle] = useState("Titulo da Coleção");
 	const [keysList, setKeysList] = useState([]);
 	const [endList, setEndList] = useState([]);
@@ -15,9 +15,9 @@ export const FormsTab = ({data}) => {
 	const handleSaveList = async () => {
 		setIsloading(true);
 		await new Promise(resolve => setTimeout(resolve, 2000));
+		resultList(endList);
 		setIsloading(false);
-		setEndList([]);
-		setKeysList([]);
+
 		toast({
 			title: "Sucesso! ",
 			position: "top",

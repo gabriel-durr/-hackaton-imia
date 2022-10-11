@@ -13,14 +13,14 @@ import {
 import {BsPlusCircleFill, BsFillDashSquareFill} from "react-icons/bs";
 import {useState} from "react";
 
-export const StatusTab = () => {
+export const StatusTab = ({list}) => {
 	const [data, setData] = useState({
-		items: ["Material", "Mercado Externo", "Faturamento", "Ano/Mes"],
+		items: ["Dado1", "Dado2", "Dado3", "Dado4"],
 		qdts: [1],
 	});
 
 	const [formula, setFormula] = useState({
-		items: ["FórmulaX", "FórmulaY", "FórmulaZ"],
+		items: !!list.length ? list : ["Aguardando a coleção ..."],
 		qdts: [1],
 	});
 

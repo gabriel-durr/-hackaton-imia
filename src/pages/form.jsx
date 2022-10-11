@@ -1,5 +1,5 @@
 import {Flex, Stack} from "@chakra-ui/react";
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import {Footer} from "../components/Footer";
 import {Header} from "../components/Header";
 
@@ -13,11 +13,16 @@ import {ContentPanel} from "../components/ContentPanel";
 
 import {Tabs} from "../components/Tabs";
 import {IoExit} from "react-icons/io5";
-import {ImEnter, ImPlus, ImCross} from "react-icons/im";
+import {ImEnter} from "react-icons/im";
 import {BsBezier} from "react-icons/bs";
 
 export default function Form({data}) {
 	const [selected, setSelected] = useState("TAB1");
+	const [list, setList] = useState([]);
+
+	const resultList = async result => {
+		setList(result.map(result => result.label));
+	};
 
 	const onSelected = selected => {
 		setSelected(selected);
@@ -49,8 +54,8 @@ export default function Form({data}) {
 				/>
 				<ContentPanel
 					selectedTemplate={selected}
-					tab1={<FormsTab data={data.dataObject} />}
-					tab2={<StatusTab />}
+					tab1={<FormsTab resultList={resultList} />}
+					tab2={<StatusTab list={list} />}
 					tab3={<ActionsTab />}
 				/>
 			</Stack>
