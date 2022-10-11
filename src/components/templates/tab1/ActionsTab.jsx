@@ -31,8 +31,8 @@ export const ActionsTab = () => {
 				<FormControl display="flex" flexDir="row">
 					<FormLabel
 						fontWeight="semibold"
-						fontSize="1.3rem"
-						color="gray.800">
+						fontSize="1.1rem"
+						color="gray.700">
 						Status:
 					</FormLabel>
 					<Select color="gray.900" w="170px" h="30px">
@@ -46,8 +46,8 @@ export const ActionsTab = () => {
 				<FormControl display="flex" flexDir="row">
 					<FormLabel
 						fontWeight="semibold"
-						fontSize="1.3rem"
-						color="gray.800">
+						fontSize="1.1rem"
+						color="gray.700">
 						Selecionar Notificação:
 					</FormLabel>
 					<Select color="gray.900" w="207px" h="30px">
