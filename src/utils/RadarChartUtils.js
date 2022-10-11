@@ -28,6 +28,16 @@ export const generateFrames = data => {
 	return data;
 };
 
+const setColor = value => {
+	if (value < 5) {
+		return "red";
+	} else if (value >= 5 && value <= 8) {
+		return "darkorange";
+	} else {
+		return "teal";
+	}
+};
+
 export const Unpack = (row, labels) => {
 	var result = [];
 	var keys = [];
@@ -47,6 +57,7 @@ export const Unpack = (row, labels) => {
 		var lZ = [];
 		var values = {};
 		var limiar = [];
+		var color = "";
 
 		labels.forEach((label, i) => {
 			arrX.push(element);
@@ -57,6 +68,7 @@ export const Unpack = (row, labels) => {
 			lZ.push(row[0][label].Limiar * (template.z[i] / 1000));
 			values[label] = row[0][label].Dados[element];
 			limiar.push(row[0][label].Limiar);
+			color = setColor(row[0][label].Dados[element]);
 		});
 
 		arrX.push(arrX[0]);
@@ -79,6 +91,7 @@ export const Unpack = (row, labels) => {
 			limiarData: limiar,
 			lineColor: "transparent",
 			limiarColor: "transparent",
+			color: color,
 		});
 	});
 
@@ -112,7 +125,7 @@ export const generateGraph = data => {
 			mode: "markers+lines",
 			text: element.hoverLabels,
 			marker: {
-				color: "blue",
+				color: element.color,
 				opacity: 0.7,
 			},
 			line: {
@@ -141,7 +154,7 @@ export const generateGraph = data => {
 			type: "scatter3d",
 			mode: "markers+lines",
 			marker: {
-				color: "orange",
+				color: element.color,
 				opacity: 0.7,
 			},
 			line: {

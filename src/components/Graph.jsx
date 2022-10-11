@@ -29,6 +29,7 @@ export const Graph = ({data}) => {
 	const [labels, setLabels] = useState([]);
 	const [actualPoint, setActualPoint] = useState(data.dataGraph.length - 1);
 	const [canHover, setCanHover] = useState(true);
+	const [lastEvent, setLastEvent] = useState(null);
 
 	var graph = [];
 
@@ -58,13 +59,13 @@ export const Graph = ({data}) => {
 
 	//init data graph
 	const initPointsGraph = data => {
-		data[data.length - 1].line.color = "red";
+		data[data.length - 1].line.color = "teal";
 
 		return data;
 	};
 
 	const initLimiarGraph = data => {
-		data[data.length - 1].line.color = "orange";
+		data[data.length - 1].line.color = "darkorange";
 
 		return data;
 	};
@@ -72,17 +73,17 @@ export const Graph = ({data}) => {
 	//show line on hover
 	const onHoverGraph = (dataGraph, dataLimiar, curvedNumber) => {
 		if (actualPoint !== curvedNumber) {
-			console.log("entrei");
 			dataGraph.forEach((element, i) => {
+				console.log("element", element);
 				if (i === curvedNumber) {
-					element.line.color = "red";
+					element.line.color = "teal";
 				} else {
 					element.line.color = "transparent";
 				}
 			});
 			dataLimiar.forEach((element, i) => {
 				if (i === curvedNumber) {
-					element.line.color = "orange";
+					element.line.color = "darkorange";
 				} else {
 					element.line.color = "transparent";
 				}
@@ -109,11 +110,25 @@ export const Graph = ({data}) => {
 					uirevision: true,
 				}}
 				onClick={event => {
-					// setCanHover(false);
-					onHandleModal(event);
+					if (canHover) {
+						let timer;
+						clearTimeout(timer);
+						timer = setTimeout(() => {
+							setCanHover(false);
+							setLastEvent(event);
+						}, 300);
+					} else {
+						let timer;
+						clearTimeout(timer);
+						timer = setTimeout(() => {
+							console.log("opa");
+							setCanHover(true);
+							onHandleModal(lastEvent);
+						}, 500);
+					}
 				}}
 				onHover={event => {
-					if (event.points[0].data.id === "points") {
+					if (event.points[0].data.id === "points" && canHover) {
 						setTimeout(() => {
 							onHoverGraph(
 								points,
@@ -123,6 +138,7 @@ export const Graph = ({data}) => {
 						}, 50);
 					}
 				}}
+				onDoubleClick={() => console.log("doubleClick")}
 			/>
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
