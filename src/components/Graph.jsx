@@ -59,13 +59,15 @@ export const Graph = ({data}) => {
 
 	//init data graph
 	const initPointsGraph = data => {
-		data[data.length - 1].line.color = "teal";
+		data[data.length - 1].line.color = "red";
+		data[data.length - 1].marker.opacity = 1;
 
 		return data;
 	};
 
 	const initLimiarGraph = data => {
-		data[data.length - 1].line.color = "darkorange";
+		data[data.length - 1].line.color = "salmon";
+		data[data.length - 1].marker.opacity = 1;
 
 		return data;
 	};
@@ -76,16 +78,20 @@ export const Graph = ({data}) => {
 			dataGraph.forEach((element, i) => {
 				console.log("element", element);
 				if (i === curvedNumber) {
-					element.line.color = "teal";
+					element.line.color = "red";
+					element.marker.opacity = 1;
 				} else {
 					element.line.color = "transparent";
+					element.marker.opacity = 0.6;
 				}
 			});
 			dataLimiar.forEach((element, i) => {
 				if (i === curvedNumber) {
 					element.line.color = "darkorange";
+					element.marker.opacity = 1;
 				} else {
 					element.line.color = "transparent";
+					element.marker.opacity = 0.6;
 				}
 			});
 
@@ -106,7 +112,6 @@ export const Graph = ({data}) => {
 				layout={{
 					width: 800,
 					height: 800,
-					title: "3d graph",
 					uirevision: true,
 				}}
 				onClick={event => {

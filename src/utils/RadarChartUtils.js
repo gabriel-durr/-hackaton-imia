@@ -28,10 +28,11 @@ export const generateFrames = data => {
 	return data;
 };
 
-const setColor = value => {
-	if (value < 5) {
+const setColor = (value, limiar) => {
+	let scale = (value * 25) / limiar;
+	if (scale < 30) {
 		return "red";
-	} else if (value >= 5 && value <= 8) {
+	} else if (scale >= 30 && scale < 70) {
 		return "darkorange";
 	} else {
 		return "teal";
@@ -57,7 +58,7 @@ export const Unpack = (row, labels) => {
 		var lZ = [];
 		var values = {};
 		var limiar = [];
-		var color = "";
+		var color = [];
 
 		labels.forEach((label, i) => {
 			arrX.push(element);
@@ -68,8 +69,12 @@ export const Unpack = (row, labels) => {
 			lZ.push(row[0][label].Limiar * (template.z[i] / 1000));
 			values[label] = row[0][label].Dados[element];
 			limiar.push(row[0][label].Limiar);
-			color = setColor(row[0][label].Dados[element]);
+			color.push(
+				setColor(row[0][label].Dados[element], row[0][label].Limiar)
+			);
 		});
+
+		color.push("transparent");
 
 		arrX.push(arrX[0]);
 		arrY.push(arrY[0]);
@@ -126,7 +131,7 @@ export const generateGraph = data => {
 			text: element.hoverLabels,
 			marker: {
 				color: element.color,
-				opacity: 0.7,
+				opacity: 0.6,
 			},
 			line: {
 				color: element.lineColor,
@@ -154,8 +159,8 @@ export const generateGraph = data => {
 			type: "scatter3d",
 			mode: "markers+lines",
 			marker: {
-				color: element.color,
-				opacity: 0.7,
+				color: "salmon",
+				opacity: 0.6,
 			},
 			line: {
 				color: element.limiarColor,
