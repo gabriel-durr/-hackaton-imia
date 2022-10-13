@@ -58,9 +58,7 @@ export default function Home({data}) {
 
 export async function getStaticProps() {
 	// Fetch data from external API
-	let data = await axios
-		.get("http://localhost:3000/api/main")
-		.then(res => res.data);
+	let data = await axios.get(process.env.URL_API).then(res => res.data);
 
 	// Pass data to the page via props
 	return {props: {data}};
