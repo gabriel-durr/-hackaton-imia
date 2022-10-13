@@ -64,9 +64,11 @@ export default function Form({data}) {
 	);
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	// Fetch data from external API
-	let data = await axios.get(process.env.URL_API).then(res => res.data);
+	let data = await axios
+		.get("https://hackacton-imia.herokuapp.com/")
+		.then(res => res.data);
 
 	// Pass data to the page via props
 	return {props: {data}};
