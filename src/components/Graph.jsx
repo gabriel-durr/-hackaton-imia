@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import Plot from "react-plotly.js";
 import {
 	Modal,
 	ModalOverlay,
@@ -13,12 +14,6 @@ import {
 	Textarea,
 	Button,
 } from "@chakra-ui/react";
-
-import dynamic from "next/dynamic";
-// Correction error Reference self is not defined ...
-const Plot = dynamic(() => import("react-plotly.js"), {
-	ssr: false,
-});
 
 export const Graph = ({data}) => {
 	const {isOpen, onOpen, onClose} = useDisclosure();
