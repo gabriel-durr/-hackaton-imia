@@ -61,6 +61,7 @@ export const Graph = ({data}) => {
 	const initPointsGraph = data => {
 		data[data.length - 1].line.color = "red";
 		data[data.length - 1].marker.opacity = 1;
+		data[data.length - 1].textfont.color = data[data.length - 1].color;
 
 		return data;
 	};
@@ -76,13 +77,14 @@ export const Graph = ({data}) => {
 	const onHoverGraph = (dataGraph, dataLimiar, curvedNumber) => {
 		if (actualPoint !== curvedNumber) {
 			dataGraph.forEach((element, i) => {
-				console.log("element", element);
 				if (i === curvedNumber) {
 					element.line.color = "red";
 					element.marker.opacity = 1;
+					element.textfont.color = element.color;
 				} else {
 					element.line.color = "transparent";
 					element.marker.opacity = 0.6;
+					element.textfont.color = "transparent";
 				}
 			});
 			dataLimiar.forEach((element, i) => {
@@ -113,6 +115,36 @@ export const Graph = ({data}) => {
 					width: 800,
 					height: 800,
 					uirevision: true,
+					scene: {
+						xaxis: {
+							zeroline: false,
+							showgrid: false,
+							visible: true,
+							showticklabels: true,
+							showline: false,
+							showspikes: false,
+							showtickprefix: false,
+							color: "#000",
+						},
+						yaxis: {
+							zeroline: false,
+							showgrid: false,
+							visible: false,
+							showticklabels: false,
+							showline: false,
+							showspikes: false,
+							showtickprefix: false,
+						},
+						zaxis: {
+							zeroline: false,
+							showgrid: false,
+							visible: false,
+							showticklabels: false,
+							showline: false,
+							showspikes: false,
+							showtickprefix: false,
+						},
+					},
 				}}
 				onClick={event => {
 					if (canHover) {
@@ -143,7 +175,6 @@ export const Graph = ({data}) => {
 						}, 50);
 					}
 				}}
-				onDoubleClick={() => console.log("doubleClick")}
 			/>
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />

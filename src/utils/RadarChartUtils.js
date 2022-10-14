@@ -59,6 +59,7 @@ export const Unpack = (row, labels) => {
 		var values = {};
 		var limiar = [];
 		var color = [];
+		var labelsList = [];
 
 		labels.forEach((label, i) => {
 			arrX.push(element);
@@ -71,6 +72,9 @@ export const Unpack = (row, labels) => {
 			limiar.push(row[0][label].Limiar);
 			color.push(
 				setColor(row[0][label].Dados[element], row[0][label].Limiar)
+			);
+			labelsList.push(
+				`${label}: ${row[0][label].Dados[element]} - ${row[0][label].Limiar}`
 			);
 		});
 
@@ -85,7 +89,7 @@ export const Unpack = (row, labels) => {
 		lZ.push(lZ[0]);
 
 		result.push({
-			hoverLabels: labels,
+			hoverLabels: labelsList,
 			hoverValues: values,
 			x: arrX,
 			y: arrY,
@@ -123,12 +127,13 @@ export const generateGraph = data => {
 		points.push({
 			id: "points",
 			frame: element,
+			color: element.color,
 			x: element.x,
 			y: element.y,
 			z: element.z,
 			type: "scatter3d",
-			mode: "markers+lines",
-			text: element.hoverLabels,
+			mode: "markers+lines+text",
+			text: [...element.hoverLabels],
 			marker: {
 				color: element.color,
 				opacity: 0.6,
@@ -137,15 +142,22 @@ export const generateGraph = data => {
 				color: element.lineColor,
 				width: 7,
 			},
+			textfont: {
+				family: "sans serif",
+				size: 18,
+				color: "transparent",
+				opacity: 1,
+			},
+
 			showlegend: false,
-			hovertemplate: `<b>Data da coleta: %{x}</b>
-			${createHoverLabels(
-				element.hoverLabels,
-				element.hoverValues,
-				element.limiarData
-			)}`,
+			// hovertemplate: `<b>Data da coleta: %{x}</b>
+			// ${createHoverLabels(
+			// 	element.hoverLabels,
+			// 	element.hoverValues,
+			// 	element.limiarData
+			// )}`,
 			hoverlabel: {
-				bgcolor: "#FFF",
+				bgcolor: "transparent",
 			},
 		});
 
@@ -176,33 +188,44 @@ export const generateGraph = data => {
 				bgcolor: "#FFF",
 			},
 			showlegend: false,
+			projection: {
+				x: {
+					show: false,
+				},
+			},
 		});
 	});
 
-	graphLabels.push({
-		id: "Label",
-		frame: labels,
-		x: labels.limiarX,
-		y: labels.limiarY,
-		z: labels.limiarZ,
-		type: "scatter3d",
-		mode: "text",
-		text: {
-			font_size: 50,
-			font_family: "Rockwell",
-		},
-		text: [...labels.hoverLabels],
-		showlegend: false,
-		hovertemplate: `<b>Data da coleta: %{x}</b>
-        ${createHoverLabels(
-			labels.hoverLabels,
-			labels.hoverValues,
-			labels.limiarData
-		)}`,
-		hoverlabel: {
-			bgcolor: "#FFF",
-		},
-	});
+	// graphLabels.push({
+	// 	id: "Label",
+	// 	frame: labels,
+	// 	x: labels.limiarX,
+	// 	y: labels.limiarY,
+	// 	z: labels.limiarZ,
+	// 	type: "scatter3d",
+	// 	mode: "text",
+	// 	text: {
+	// 		font_size: 50,
+	// 		font_family: "Rockwell",
+	// 	},
+	// 	text: [...labels.hoverLabels],
+	// 	showlegend: false,
+	// 	hovertemplate: `<b>Data da coleta: %{x}</b>
+	//     ${createHoverLabels(
+	// 		labels.hoverLabels,
+	// 		labels.hoverValues,
+	// 		labels.limiarData
+	// 	)}`,
+	// 	hoverlabel: {
+	// 		bgcolor: "#FFF",
+	// 	},
+	// 	projection: {
+	// 		x: {
+	// 			show: false,
+	// 		},
+	// 	},
+	// 	visible: false,
+	// });
 
 	return {
 		dataGraph: points,
