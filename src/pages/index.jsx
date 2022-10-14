@@ -1,21 +1,21 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import {Flex, Stack} from "@chakra-ui/react";
-
 import axios from "axios";
 
 import {Footer} from "../components/Footer";
 import {Header} from "../components/Header";
 import {Tabs} from "../components/Tabs";
 import {ContentPanel} from "../components/ContentPanel";
-import {Tab3Template} from "../components/templates/tab3/Tab3Template";
+
 import {
 	FaStepBackward,
 	FaStepForward,
 	FaDigitalTachograph,
 } from "react-icons/fa";
+import {Graph} from "../components/templates/tab3/Graph";
 
 export default function Home({data}) {
-	const [selected, setSelected] = useState("TAB1");
+	const [selected, setSelected] = useState("TAB2");
 
 	const onSelected = selected => {
 		setSelected(selected);
@@ -46,9 +46,9 @@ export default function Home({data}) {
 				/>
 				<ContentPanel
 					selectedTemplate={selected}
-					tab1={<Tab3Template data={data.graphStruct} />}
-					tab2={<Tab3Template data={data.graphStruct} />}
-					tab3={<Tab3Template data={data.graphStruct} />}
+					tab1={<></>}
+					tab2={<Graph data={data.graphStruct} />}
+					tab3={<></>}
 				/>
 			</Stack>
 			<Footer />
