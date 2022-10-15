@@ -14,6 +14,7 @@ import {
 import {BsPlusCircleFill, BsFillDashSquareFill} from "react-icons/bs";
 import {useState} from "react";
 import {EditableItem} from "../../../utils/EditableItem";
+import {DraggableStatus} from "../../../utils/DraggableStatus";
 
 export const StatusTab = ({list, resultStatus}) => {
 	const toast = useToast();
@@ -104,13 +105,13 @@ export const StatusTab = ({list, resultStatus}) => {
 			direction="column">
 			<HStack spacing="16">
 				<EditableItem
-					color="mia.200"
+					color="mia.400"
 					fontSize="xl"
 					value={titleStatus.name}
 					setValue={handleName}
 				/>
 				<EditableItem
-					color="mia.200"
+					color="mia.400"
 					fontSize="xl"
 					value={titleStatus.limiar}
 					setValue={handleLimiar}
@@ -159,75 +160,83 @@ export const StatusTab = ({list, resultStatus}) => {
 						width: "0px",
 					},
 				}}>
-				{formula.qdts.map((qdt, index) => (
-					<HStack key={index} align="flex-end" spacing="6">
-						<FormControl w={qdt > 1 ? "187px" : "232px"}>
-							<FormLabel
-								fontWeight="bold"
-								fontSize="1.2rem"
-								borderBottom={qdt > 1 ? "" : "1px solid #000"}>
-								Fórmulas
-							</FormLabel>
-							<Select
-								color="gray.900"
-								w="200px"
-								h="32px"
-								fontSize="1.1rem">
-								{formula.items.map((item, index) => (
-									<option key={index} value={item}>
-										{item}
-									</option>
-								))}
-							</Select>
-						</FormControl>
-						{qdt > 1 && (
-							<IconButton
-								size="sm"
-								color="red.400"
-								_hover={{
-									color: "red",
-								}}
-								icon={<BsFillDashSquareFill />}
-								onClick={() => handleRemoveFormula(qdt)}
-							/>
-						)}
-					</HStack>
-				))}
-				{data.qdts.map((qdt, index) => (
-					<HStack key={index} align="flex-end" spacing="6">
-						<FormControl w={qdt > 1 ? "187px" : "232px"}>
-							<FormLabel
-								fontWeight="bold"
-								fontSize="1.2rem"
-								borderBottom={qdt > 1 ? "" : "1px solid #000"}>
-								Dados
-							</FormLabel>
-							<Select
-								color="gray.900"
-								w="200px"
-								h="32px"
-								fontSize="1.1rem"
-								label="Dados">
-								{data.items.map((item, index) => (
-									<option key={index} value={item}>
-										{item}
-									</option>
-								))}
-							</Select>
-						</FormControl>
-						{qdt > 1 && (
-							<IconButton
-								size="sm"
-								color="red.400"
-								_hover={{
-									color: "red",
-								}}
-								icon={<BsFillDashSquareFill />}
-								onClick={() => handleRemoveData(qdt)}
-							/>
-						)}
-					</HStack>
-				))}
+				<DraggableStatus>
+					{formula.qdts.map((qdt, index) => (
+						<HStack key={index} align="flex-end" spacing="6">
+							<FormControl w={qdt > 1 ? "187px" : "232px"}>
+								<FormLabel
+									fontWeight="bold"
+									fontSize="1.2rem"
+									borderBottom={
+										qdt > 1 ? "" : "1px solid #000"
+									}>
+									Fórmulas
+								</FormLabel>
+								<Select
+									color="gray.900"
+									w="200px"
+									h="32px"
+									fontSize="1.1rem">
+									{formula.items.map((item, index) => (
+										<option key={index} value={item}>
+											{item}
+										</option>
+									))}
+								</Select>
+							</FormControl>
+							{qdt > 1 && (
+								<IconButton
+									size="sm"
+									color="red.400"
+									_hover={{
+										color: "red",
+									}}
+									icon={<BsFillDashSquareFill />}
+									onClick={() => handleRemoveFormula(qdt)}
+								/>
+							)}
+						</HStack>
+					))}
+				</DraggableStatus>
+				<DraggableStatus>
+					{data.qdts.map((qdt, index) => (
+						<HStack key={index} align="flex-end" spacing="6">
+							<FormControl w={qdt > 1 ? "187px" : "232px"}>
+								<FormLabel
+									fontWeight="bold"
+									fontSize="1.2rem"
+									borderBottom={
+										qdt > 1 ? "" : "1px solid #000"
+									}>
+									Dados
+								</FormLabel>
+								<Select
+									color="gray.900"
+									w="200px"
+									h="32px"
+									fontSize="1.1rem"
+									label="Dados">
+									{data.items.map((item, index) => (
+										<option key={index} value={item}>
+											{item}
+										</option>
+									))}
+								</Select>
+							</FormControl>
+							{qdt > 1 && (
+								<IconButton
+									size="sm"
+									color="red.400"
+									_hover={{
+										color: "red",
+									}}
+									icon={<BsFillDashSquareFill />}
+									onClick={() => handleRemoveData(qdt)}
+								/>
+							)}
+						</HStack>
+					))}
+				</DraggableStatus>
 			</VStack>
 
 			{!!list.length && (

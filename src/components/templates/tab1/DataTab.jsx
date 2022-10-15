@@ -50,7 +50,7 @@ export const DataTab = ({data, resultList}) => {
 			</VStack>
 			<Stack align="center" spacing="2" w="100%" h="90%">
 				<EditableItem
-					color="mia.200"
+					color="mia.400"
 					fontSize="xl"
 					value={title}
 					setValue={setTitle}
