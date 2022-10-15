@@ -77,43 +77,51 @@ export const ActionsTab = ({process, setProcess}) => {
 			</HStack>
 
 			<VStack spacing="7">
-				<FormControl display="flex" flexDir="row" alignItems="center">
-					<FormLabel
-						fontWeight="semibold"
-						fontSize="1.2rem"
-						color="gray.700">
-						Status:
-					</FormLabel>
-					<Select
-						color="gray.900"
-						w="200px"
-						h="32px"
-						fontSize="1.1rem">
-						{process.statusList.map((item, index) => (
-							<option key={index} value={item}>
-								{item}
-							</option>
-						))}
-					</Select>
+				<FormControl
+					display="flex"
+					flexDir="row"
+					alignItems="flex-start">
+					<HStack>
+						<FormLabel
+							fontWeight="semibold"
+							fontSize="1.15rem"
+							color="gray.700">
+							Status:
+						</FormLabel>
+						<Select
+							color="gray.900"
+							w="200px"
+							h="30px"
+							fontSize="1rem">
+							{process.statusList.map((item, index) => (
+								<option key={index} value={item}>
+									{item}
+								</option>
+							))}
+						</Select>
+					</HStack>
 				</FormControl>
-				<FormControl display="flex" flexDir="row" alignItems="center">
-					<FormLabel
-						fontWeight="semibold"
-						fontSize="1.2rem"
-						color="gray.700">
-						Selecionar Processo:
-					</FormLabel>
-					<Select
-						color="gray.900"
-						w="200px"
-						h="32px"
-						fontSize="1.1rem">
-						{process.process.map((item, index) => (
-							<option key={index} value={item}>
-								{item}
-							</option>
-						))}
-					</Select>
+
+				<FormControl>
+					<HStack>
+						<FormLabel
+							fontWeight="semibold"
+							fontSize="1.15rem"
+							color="gray.700">
+							Selecionar Processo:
+						</FormLabel>
+						<Select
+							color="gray.900"
+							w="200px"
+							h="30px"
+							fontSize="1rem">
+							{process.process.map((item, index) => (
+								<option key={index} value={item}>
+									{item}
+								</option>
+							))}
+						</Select>
+					</HStack>
 				</FormControl>
 			</VStack>
 			<Button
