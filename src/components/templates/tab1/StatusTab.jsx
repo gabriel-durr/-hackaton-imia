@@ -123,7 +123,7 @@ export const StatusTab = ({list, resultStatus}) => {
 				spacing="4"
 				align="center"
 				justify="center">
-				<Button w="145px" h="32px" onClick={handleNewFormula}>
+				<Button w="130px" h="32px" onClick={handleNewFormula}>
 					<Icon w="5" h="5" as={BsPlusCircleFill} />
 					<Text
 						as="span"
@@ -134,7 +134,7 @@ export const StatusTab = ({list, resultStatus}) => {
 					</Text>
 				</Button>
 
-				<Button w="145px" h="32px" onClick={handleNewData}>
+				<Button w="130px" h="32px" onClick={handleNewData}>
 					<Icon w="5" h="5" as={BsPlusCircleFill} />
 					<Text
 						as="span"
