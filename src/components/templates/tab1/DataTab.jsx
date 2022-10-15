@@ -51,7 +51,7 @@ export const DataTab = ({data, resultList}) => {
 			<Stack align="center" spacing="2" w="100%" h="90%">
 				<EditableItem
 					color="mia.200"
-					fontSize="2xl"
+					fontSize="xl"
 					value={title}
 					setValue={setTitle}
 				/>

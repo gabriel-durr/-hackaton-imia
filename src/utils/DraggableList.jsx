@@ -148,7 +148,7 @@ export const DraggableList = ({list, setItemList, endList, setEndList}) => {
 						bg="#f7f7f7"
 						rounded="lg"
 						w="100%"
-						minH="370px"
+						minH="270px"
 						p="20px"
 						overflow="scroll"
 						sx={{

@@ -63,13 +63,13 @@ export const ActionsTab = ({process, setProcess}) => {
 			direction="column">
 			<HStack spacing="16">
 				<EditableItem
-					fontSize="2xl"
+					fontSize="xl"
 					color="mia.200"
 					value={titleProcess.name}
 					setValue={handleName}
 				/>
 				<EditableItem
-					fontSize="2xl"
+					fontSize="xl"
 					color="mia.200"
 					value={titleProcess.status}
 					setValue={handleStatus}
@@ -77,17 +77,17 @@ export const ActionsTab = ({process, setProcess}) => {
 			</HStack>
 
 			<VStack spacing="7">
-				<FormControl display="flex" flexDir="row">
+				<FormControl display="flex" flexDir="row" alignItems="center">
 					<FormLabel
 						fontWeight="semibold"
-						fontSize="1.32rem"
+						fontSize="1.2rem"
 						color="gray.700">
 						Status:
 					</FormLabel>
 					<Select
 						color="gray.900"
 						w="200px"
-						h="38px"
+						h="32px"
 						fontSize="1.1rem">
 						{process.statusList.map((item, index) => (
 							<option key={index} value={item}>
@@ -96,17 +96,17 @@ export const ActionsTab = ({process, setProcess}) => {
 						))}
 					</Select>
 				</FormControl>
-				<FormControl display="flex" flexDir="row">
+				<FormControl display="flex" flexDir="row" alignItems="center">
 					<FormLabel
 						fontWeight="semibold"
-						fontSize="1.32rem"
+						fontSize="1.2rem"
 						color="gray.700">
 						Selecionar Processo:
 					</FormLabel>
 					<Select
 						color="gray.900"
 						w="200px"
-						h="38px"
+						h="32px"
 						fontSize="1.1rem">
 						{process.process.map((item, index) => (
 							<option key={index} value={item}>

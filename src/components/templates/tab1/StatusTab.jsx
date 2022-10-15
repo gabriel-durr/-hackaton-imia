@@ -105,13 +105,13 @@ export const StatusTab = ({list, resultStatus}) => {
 			<HStack spacing="16">
 				<EditableItem
 					color="mia.200"
-					fontSize="2xl"
+					fontSize="xl"
 					value={titleStatus.name}
 					setValue={handleName}
 				/>
 				<EditableItem
 					color="mia.200"
-					fontSize="2xl"
+					fontSize="xl"
 					value={titleStatus.limiar}
 					setValue={handleLimiar}
 				/>
@@ -127,7 +127,7 @@ export const StatusTab = ({list, resultStatus}) => {
 					<Icon w="5" h="5" as={BsPlusCircleFill} />
 					<Text
 						as="span"
-						fontSize="1.2rem"
+						fontSize="1.05rem"
 						ml="10px"
 						textTransform="uppercase">
 						Fórmulas
@@ -138,7 +138,7 @@ export const StatusTab = ({list, resultStatus}) => {
 					<Icon w="5" h="5" as={BsPlusCircleFill} />
 					<Text
 						as="span"
-						fontSize="1.2rem"
+						fontSize="1.05rem"
 						ml="10px"
 						textTransform="uppercase">
 						Dados
@@ -164,14 +164,14 @@ export const StatusTab = ({list, resultStatus}) => {
 						<FormControl w={qdt > 1 ? "190px" : "232px"}>
 							<FormLabel
 								fontWeight="bold"
-								fontSize="1.32rem"
+								fontSize="1.2rem"
 								borderBottom={qdt > 1 ? "" : "1px solid #000"}>
 								Fórmulas
 							</FormLabel>
 							<Select
 								color="gray.900"
 								w="200px"
-								h="38px"
+								h="32px"
 								fontSize="1.1rem">
 								{formula.items.map((item, index) => (
 									<option key={index} value={item}>
@@ -197,14 +197,14 @@ export const StatusTab = ({list, resultStatus}) => {
 						<FormControl w={qdt > 1 ? "190px" : "232px"}>
 							<FormLabel
 								fontWeight="bold"
-								fontSize="1.32rem"
+								fontSize="1.2rem"
 								borderBottom={qdt > 1 ? "" : "1px solid #000"}>
 								Dados
 							</FormLabel>
 							<Select
 								color="gray.900"
 								w="200px"
-								h="38px"
+								h="32px"
 								fontSize="1.1rem"
 								label="Dados">
 								{data.items.map((item, index) => (

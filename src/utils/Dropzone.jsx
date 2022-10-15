@@ -73,7 +73,7 @@ export const Dropzone = ({setKeysList, keysList, setEndList, endList}) => {
 					/>
 				)}
 				{!keysList.length && !endList.length && (
-					<Box pos="absolute" right="477" bottom="-420" minW="170px">
+					<Box pos="absolute" right="477" bottom="-320" minW="170px">
 						<Image
 							alt="upload do arquivo"
 							src="/upload.svg"
