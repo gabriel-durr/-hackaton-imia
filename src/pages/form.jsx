@@ -5,7 +5,7 @@ import {Header} from "../components/Header";
 
 import axios from "axios";
 
-import {FormsTab} from "../components/templates/tab1/FormsTab";
+import {DataTab} from "../components/templates/tab1/DataTab";
 import {StatusTab} from "../components/templates/tab1/StatusTab";
 import {ActionsTab} from "../components/templates/tab1/ActionsTab";
 
@@ -20,6 +20,15 @@ export default function Form({data}) {
 	const [selected, setSelected] = useState("TAB1");
 	const [list, setList] = useState([]);
 
+	const [process, setProcess] = useState({
+		statusList: ["Aguardando status..."],
+		process: [
+			"Notificação no Gráfico",
+			"Notificação Push",
+			"Botão Flutuante",
+		],
+	});
+
 	const resultList = async result => {
 		setList(result.map(result => result.label));
 	};
@@ -28,24 +37,27 @@ export default function Form({data}) {
 		setSelected(selected);
 	};
 
+	const resultStatus = result => {
+		setProcess({
+			...process,
+			statusList: Object.values(result),
+		});
+	};
+
 	return (
 		<Flex
 			w="100vw"
 			h="100vh"
 			justify="space-between"
 			align="center"
+			boxShadow="inset 1px -1px 17px 0px rgba(0,0,0,1)"
 			direction="column">
 			<Header />
-			<Stack
-				h="100%"
-				w="100%"
-				maxW="container.xl"
-				bg="whiteAlpha.800"
-				align="center">
+			<Stack h="100%" w="100%" maxW="container.xl" align="center">
 				<Tabs
 					selected={selected}
 					onSelect={onSelected}
-					label1="formulários"
+					label1="Dados"
 					label2="status"
 					label3="ações"
 					icon1={ImEnter}
@@ -54,9 +66,11 @@ export default function Form({data}) {
 				/>
 				<ContentPanel
 					selectedTemplate={selected}
-					tab1={<FormsTab resultList={resultList} />}
-					tab2={<StatusTab list={list} />}
-					tab3={<ActionsTab />}
+					tab1={<DataTab resultList={resultList} />}
+					tab2={<StatusTab list={list} resultStatus={resultStatus} />}
+					tab3={
+						<ActionsTab process={process} setProcess={setProcess} />
+					}
 				/>
 			</Stack>
 			<Footer />

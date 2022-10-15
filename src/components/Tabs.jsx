@@ -12,29 +12,24 @@ export const Tabs = ({
 }) => {
 	return (
 		<Flex
-			w="min-content"
-			h="70px"
+			w="98%"
+			h="85px"
 			align="flex-start"
 			justify="center"
-			marginTop="12px"
-			cursor="pointer">
+			cursor="pointer"
+			marginTop="12px">
 			<VStack
 				zIndex="1"
 				pos="relative"
 				p="2px"
 				variant="brand"
 				align="center"
-				borderRadius="10px 0px 0px 0px"
+				rounded="sm"
 				justify="flex-end"
-				w="20rem"
+				w="33.33%"
 				h="100%"
-				bg={selected == "TAB1" ? "#010721de" : "#0a587994"}
-				_hover={
-					selected == "TAB1" && {
-						filter: "brightness(1)",
-						transition: ".4s ease",
-					}
-				}
+				bg={selected == "TAB1" ? "mia.500" : "mia.600"}
+				_hover={{filter: "brightness(0.9)", transition: ".4s ease"}}
 				_after={
 					selected == "TAB1" && {
 						content: "''",
@@ -70,15 +65,10 @@ export const Tabs = ({
 				variant="brand"
 				align="center"
 				justify="flex-end"
-				w="20rem"
+				w="33.33%"
 				h="100%"
-				bg={selected == "TAB2" ? "#010721de" : "#0a587994"}
-				_hover={
-					selected == "TAB2" && {
-						filter: "brightness(1)",
-						transition: ".4s ease",
-					}
-				}
+				bg={selected == "TAB2" ? "mia.500" : "mia.600"}
+				_hover={{filter: "brightness(0.9)", transition: ".4s ease"}}
 				_after={
 					selected == "TAB2" && {
 						content: "''",
@@ -113,17 +103,12 @@ export const Tabs = ({
 				p="2px"
 				variant="brand"
 				align="center"
-				borderRadius="0px 10px 0px 0px"
+				rounded="sm"
 				justify="flex-end"
-				w="20rem"
+				w="33.33%"
 				h="100%"
-				bg={selected == "TAB3" ? "#010721de" : "#0a587994"}
-				_hover={
-					selected == "TAB3" && {
-						filter: "brightness(1)",
-						transition: ".4s ease",
-					}
-				}
+				bg={selected == "TAB3" ? "mia.500" : "mia.600"}
+				_hover={{filter: "brightness(0.9)", transition: ".4s ease"}}
 				_after={
 					selected == "TAB3" && {
 						content: "''",

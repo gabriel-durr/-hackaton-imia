@@ -1,21 +1,57 @@
 import {useState} from "react";
-import {Flex, VStack, FormControl, FormLabel, Select} from "@chakra-ui/react";
+import {
+	Flex,
+	VStack,
+	FormControl,
+	FormLabel,
+	Select,
+	HStack,
+	Button,
+	useToast,
+} from "@chakra-ui/react";
 import {EditableItem} from "../../../utils/EditableItem";
 
-export const ActionsTab = () => {
-	const [title, setTitle] = useState("Titulo do Processo");
-	const [process, setProcess] = useState({
-		statusList: ["Material", "Mercado Externo", "Faturamento", "Ano/Mes"],
-		process: [
-			"Notificação no Gráfico",
-			"Notificação Push",
-			"Botão Flutuante",
-		],
-	});
+export const ActionsTab = ({process, setProcess}) => {
+	const toast = useToast();
+
+	const [isLoading, setIsloading] = useState(false);
+	const [titleProcess, setTitleProcess] = useState(initialStatusTitle);
+
+	function handleName(name) {
+		setTitleProcess({...titleProcess, name: name});
+	}
+
+	function handleStatus(status) {
+		setTitleProcess({...titleProcess, status: status});
+	}
+
+	const handleSaveList = async () => {
+		setIsloading(true);
+		await new Promise(resolve => setTimeout(resolve, 2000));
+		setTitleProcess(initialStatusTitle);
+		setProcess({
+			statusList: ["Aguardando status..."],
+			process: [
+				"Notificação no Gráfico",
+				"Notificação Push",
+				"Botão Flutuante",
+			],
+		});
+
+		setIsloading(false);
+
+		toast({
+			title: "Processo salvo em nosso banco de dados com sucesso!",
+			position: "top",
+			status: "success",
+			duration: 9000,
+			isClosable: true,
+		});
+	};
 
 	return (
 		<Flex
-			bg="#f7fcfd"
+			bg="#fff"
 			w="100%"
 			overflow="hidden"
 			pos="relative"
@@ -25,17 +61,34 @@ export const ActionsTab = () => {
 			justify="flex-start"
 			align="center"
 			direction="column">
-			<EditableItem value={title} setValue={setTitle} />
+			<HStack spacing="16">
+				<EditableItem
+					fontSize="2xl"
+					color="mia.200"
+					value={titleProcess.name}
+					setValue={handleName}
+				/>
+				<EditableItem
+					fontSize="2xl"
+					color="mia.200"
+					value={titleProcess.status}
+					setValue={handleStatus}
+				/>
+			</HStack>
 
 			<VStack spacing="7">
 				<FormControl display="flex" flexDir="row">
 					<FormLabel
 						fontWeight="semibold"
-						fontSize="1.1rem"
+						fontSize="1.32rem"
 						color="gray.700">
 						Status:
 					</FormLabel>
-					<Select color="gray.900" w="170px" h="30px">
+					<Select
+						color="gray.900"
+						w="200px"
+						h="38px"
+						fontSize="1.1rem">
 						{process.statusList.map((item, index) => (
 							<option key={index} value={item}>
 								{item}
@@ -46,11 +99,15 @@ export const ActionsTab = () => {
 				<FormControl display="flex" flexDir="row">
 					<FormLabel
 						fontWeight="semibold"
-						fontSize="1.1rem"
+						fontSize="1.32rem"
 						color="gray.700">
-						Selecionar Notificação:
+						Selecionar Processo:
 					</FormLabel>
-					<Select color="gray.900" w="207px" h="30px">
+					<Select
+						color="gray.900"
+						w="200px"
+						h="38px"
+						fontSize="1.1rem">
 						{process.process.map((item, index) => (
 							<option key={index} value={item}>
 								{item}
@@ -59,6 +116,26 @@ export const ActionsTab = () => {
 					</Select>
 				</FormControl>
 			</VStack>
+			<Button
+				pos="absolute"
+				bottom="2"
+				right="7"
+				colorScheme="cyan"
+				loadingText="Salvando"
+				rounded="lg"
+				isLoading={isLoading}
+				onClick={() => handleSaveList()}
+				color="#fff"
+				w="170px"
+				h="37px"
+				fontWeight="bold">
+				Salvar
+			</Button>
 		</Flex>
 	);
+};
+
+const initialStatusTitle = {
+	name: "Atribuir nome",
+	status: "Atribuir Status",
 };

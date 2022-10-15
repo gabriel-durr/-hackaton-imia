@@ -14,18 +14,13 @@ export const ContentPanel = ({selectedTemplate, tab1, tab2, tab3}) => {
 
 	return (
 		<Flex
-			h="39.5rem"
-			w="60rem"
-			boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
+			h="46.5rem"
+			w="80rem"
+			shadow="dark-lg"
 			align="center"
 			justify="flex-start"
 			p="2rem 1rem"
-			overflow="scroll"
-			sx={{
-				"&::-webkit-scrollbar": {
-					width: "0px",
-				},
-			}}
+			overflow="hidden"
 			mt="20px"
 			direction="column">
 			<Template selected={selectedTemplate} />

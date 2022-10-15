@@ -93,9 +93,9 @@ export const DraggableList = ({list, setItemList, endList, setEndList}) => {
 								index={index}>
 								{(provided, snapshot) => (
 									<Box
-										p="5px"
+										p="6px"
 										pos="relative"
-										minW="120px"
+										minW="140px"
 										shadow="lg"
 										rounded="lg"
 										color="#fff"
@@ -143,10 +143,12 @@ export const DraggableList = ({list, setItemList, endList, setEndList}) => {
 					<VStack
 						pos="relative"
 						border="2px dotted #949494"
+						align="center"
+						justify="center"
 						bg="#f7f7f7"
 						rounded="lg"
 						w="100%"
-						minH="300px"
+						minH="370px"
 						p="20px"
 						overflow="scroll"
 						sx={{
@@ -179,8 +181,6 @@ export const DraggableList = ({list, setItemList, endList, setEndList}) => {
 								<Text
 									color="gray.500"
 									fontWeight="hairline"
-									pos="absolute"
-									top="36"
 									fontSize="2xl">
 									Arraste aqui os Itens
 								</Text>
@@ -194,9 +194,9 @@ export const DraggableList = ({list, setItemList, endList, setEndList}) => {
 								index={index}>
 								{(provided, snapshot) => (
 									<Box
-										p="5px"
+										p="7px"
 										pos="relative"
-										minW="170px"
+										minW="200px"
 										shadow="lg"
 										rounded="lg"
 										color="#fff"

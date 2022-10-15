@@ -4,7 +4,7 @@ import {Dropzone} from "../../../utils/Dropzone";
 import {DraggableList} from "../../../utils/DraggableList";
 import {EditableItem} from "../../../utils/EditableItem";
 
-export const FormsTab = ({data, resultList}) => {
+export const DataTab = ({data, resultList}) => {
 	const [title, setTitle] = useState("Titulo da Coleção");
 	const [keysList, setKeysList] = useState([]);
 	const [endList, setEndList] = useState([]);
@@ -19,9 +19,8 @@ export const FormsTab = ({data, resultList}) => {
 		setIsloading(false);
 
 		toast({
-			title: "Sucesso! ",
+			title: "Coleção de dados Salva com sucesso!",
 			position: "top",
-			description: "Sua coleção foi salva em nosso banco de dados",
 			status: "success",
 			duration: 9000,
 			isClosable: true,
@@ -35,17 +34,35 @@ export const FormsTab = ({data, resultList}) => {
 			p="1rem"
 			gap="20"
 			flexDir="column"
-			overflowX="hidden"
+			overflow="hidden"
 			px="2rem"
 			margin="15px"
-			bg="#f7fcfd"
+			bg="#fff"
 			w="100%"
-			h="100%"
-			sx={{
-				"&::-webkit-scrollbar": {
-					width: "0px",
-				},
-			}}>
+			h="100%">
+			<VStack pos="absolute" right="4" top="2" zIndex="7">
+				<Dropzone
+					setKeysList={setKeysList}
+					keysList={keysList}
+					setEndList={setEndList}
+					endList={endList}
+				/>
+			</VStack>
+			<Stack align="center" spacing="2" w="100%" h="90%">
+				<EditableItem
+					color="mia.200"
+					fontSize="2xl"
+					value={title}
+					setValue={setTitle}
+				/>
+
+				<DraggableList
+					list={keysList}
+					setItemList={setKeysList}
+					endList={endList}
+					setEndList={setEndList}
+				/>
+			</Stack>
 			{!!endList.length && (
 				<Button
 					pos="absolute"
@@ -55,32 +72,14 @@ export const FormsTab = ({data, resultList}) => {
 					isLoading={isLoading}
 					onClick={() => handleSaveList()}
 					color="#fff"
-					top="12"
-					left="9%"
-					w="110px"
-					h="32px"
+					bottom="0"
+					right="7"
+					w="170px"
+					h="37px"
 					fontWeight="bold">
 					Salvar
 				</Button>
 			)}
-			<VStack pos="absolute" right="4" top="2" zIndex="7">
-				<Dropzone
-					setKeysList={setKeysList}
-					keysList={keysList}
-					setEndList={setEndList}
-					endList={endList}
-				/>
-			</VStack>
-			<Stack align="center" spacing="2" w="100%" h="100%">
-				<EditableItem value={title} setValue={setTitle} />
-
-				<DraggableList
-					list={keysList}
-					setItemList={setKeysList}
-					endList={endList}
-					setEndList={setEndList}
-				/>
-			</Stack>
 		</Flex>
 	);
 };

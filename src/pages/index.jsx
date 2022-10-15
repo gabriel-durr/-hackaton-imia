@@ -26,14 +26,10 @@ export default function Home({data}) {
 			h="100vh"
 			justify="space-between"
 			align="center"
+			bg="whiteAlpha.800"
 			direction="column">
 			<Header />
-			<Stack
-				h="100%"
-				w="100%"
-				maxW="container.xl"
-				bg="whiteAlpha.800"
-				align="center">
+			<Stack h="100%" w="100%" maxW="container.xl" align="center">
 				<Tabs
 					selected={selected}
 					onSelect={onSelected}
