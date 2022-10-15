@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import {CheckIcon, CloseIcon, EditIcon} from "@chakra-ui/icons";
 
-export const EditableItem = ({value, setValue}) => {
+export const EditableItem = props => {
 	/* Here's a custom control */
 	function EditableControls() {
 		const {
@@ -23,11 +23,13 @@ export const EditableItem = ({value, setValue}) => {
 		return isEditing ? (
 			<ButtonGroup justifyContent="center" size="sm">
 				<IconButton
+					aria-label="Ícone Confirmar"
 					color="green.400"
 					icon={<CheckIcon />}
 					{...getSubmitButtonProps()}
 				/>
 				<IconButton
+					aria-label="Ícone Fechar"
 					color="red.400"
 					icon={<CloseIcon />}
 					{...getCancelButtonProps()}
@@ -36,6 +38,7 @@ export const EditableItem = ({value, setValue}) => {
 		) : (
 			<Flex justifyContent="center">
 				<IconButton
+					aria-label="Ícone Editar"
 					color="cyan.400"
 					size="md"
 					icon={<EditIcon />}
@@ -49,18 +52,21 @@ export const EditableItem = ({value, setValue}) => {
 		<Editable
 			pos="relative"
 			right="-8"
+			top="-2"
 			textAlign="center"
-			defaultValue={value}
-			fontSize="3xl"
+			defaultValue={props.value}
+			value={props.value}
+			fontWeight="bold"
 			display="flex"
 			gap="7"
 			flexDirection="row"
-			isPreviewFocusable={false}>
+			isPreviewFocusable={false}
+			{...props}>
 			<EditablePreview />
 			{/* Here is the custom input */}
 			<Input
 				as={EditableInput}
-				onChange={e => setValue(e.target.value)}
+				onChange={e => props.setValue(e.target.value)}
 			/>
 			<EditableControls />
 		</Editable>

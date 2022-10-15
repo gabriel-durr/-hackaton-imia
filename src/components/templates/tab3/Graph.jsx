@@ -1,4 +1,19 @@
 import {useEffect, useState} from "react";
+import dynamic from "next/dynamic";
+
+const Plot = dynamic(() => import("react-plotly.js"), {
+	loading: () => (
+		<Spinner
+			thickness="4px"
+			speed="0.65s"
+			emptyColor="gray.200"
+			color="blue.500"
+			size="xl"
+		/>
+	),
+	ssr: false,
+});
+
 import {
 	Modal,
 	ModalOverlay,
@@ -7,18 +22,12 @@ import {
 	ModalFooter,
 	ModalBody,
 	ModalCloseButton,
-	Box,
 	useDisclosure,
 	Text,
 	Textarea,
+	Spinner,
 	Button,
 } from "@chakra-ui/react";
-
-import dynamic from "next/dynamic";
-// Correction error Reference self is not defined ...
-const Plot = dynamic(() => import("react-plotly.js"), {
-	ssr: false,
-});
 
 export const Graph = ({data}) => {
 	const {isOpen, onOpen, onClose} = useDisclosure();
@@ -30,8 +39,6 @@ export const Graph = ({data}) => {
 	const [actualPoint, setActualPoint] = useState(data.dataGraph.length - 1);
 	const [canHover, setCanHover] = useState(true);
 	const [lastEvent, setLastEvent] = useState(null);
-
-	var graph = [];
 
 	useEffect(() => {
 		setPoints([...initPointsGraph(data.dataGraph)]);
@@ -76,7 +83,6 @@ export const Graph = ({data}) => {
 	const onHoverGraph = (dataGraph, dataLimiar, curvedNumber) => {
 		if (actualPoint !== curvedNumber) {
 			dataGraph.forEach((element, i) => {
-				console.log("element", element);
 				if (i === curvedNumber) {
 					element.line.color = "red";
 					element.marker.opacity = 1;
@@ -105,7 +111,7 @@ export const Graph = ({data}) => {
 	var graph = [...points, ...limiar, ...labels];
 
 	return (
-		<Box>
+		<>
 			<Plot
 				divId="myChart"
 				data={graph}
@@ -173,6 +179,6 @@ export const Graph = ({data}) => {
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
-		</Box>
+		</>
 	);
 };

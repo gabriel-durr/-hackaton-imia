@@ -53,12 +53,14 @@ export const colors = {
 		200: "#0F1B31",
 		300: "#20879a",
 		400: "#e0245e",
+		500: "#c40052",
+		600: "#2694a3",
 	},
 };
 
 const fonts = {
 	heading: "DM Sans, sans-serif",
-	body: "DM Sans, sans-serif",
+	body: "Maven Pro, sans-serif",
 };
 
 const theme = extendTheme({

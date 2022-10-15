@@ -1,40 +1,35 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import {Flex, Stack} from "@chakra-ui/react";
-
 import axios from "axios";
 
 import {Footer} from "../components/Footer";
 import {Header} from "../components/Header";
 import {Tabs} from "../components/Tabs";
 import {ContentPanel} from "../components/ContentPanel";
-import {Tab3Template} from "../components/templates/tab3/Tab3Template";
+
 import {
 	FaStepBackward,
 	FaStepForward,
 	FaDigitalTachograph,
 } from "react-icons/fa";
+import {Graph} from "../components/templates/tab3/Graph";
 
 export default function Home({data}) {
-	const [selected, setSelected] = useState("TAB1");
+	const [selected, setSelected] = useState("TAB2");
 
 	const onSelected = selected => {
 		setSelected(selected);
 	};
-
 	return (
 		<Flex
 			w="100vw"
 			h="100vh"
 			justify="space-between"
 			align="center"
+			bg="whiteAlpha.800"
 			direction="column">
 			<Header />
-			<Stack
-				h="100%"
-				w="100%"
-				maxW="container.xl"
-				bg="whiteAlpha.800"
-				align="center">
+			<Stack h="100%" w="100%" maxW="container.xl" align="center">
 				<Tabs
 					selected={selected}
 					onSelect={onSelected}
@@ -47,9 +42,9 @@ export default function Home({data}) {
 				/>
 				<ContentPanel
 					selectedTemplate={selected}
-					tab3={<Tab3Template data={data.graphStruct} />}
-					tab2={<Tab3Template data={data.graphStruct} />}
-					tab1={<Tab3Template data={data.graphStruct} />}
+					tab1={<></>}
+					tab2={<Graph data={data.graphStruct} />}
+					tab3={<></>}
 				/>
 			</Stack>
 			<Footer />
@@ -57,9 +52,11 @@ export default function Home({data}) {
 	);
 }
 
-export async function getServerSideProps() {
-	// Fetch data from external API.
-	let data = await axios.get(process.env.URL_API).then(res => res.data);
+export async function getStaticProps() {
+	// Fetch data from external API
+	let data = await axios
+		.get("https://hackacton-imia.herokuapp.com/")
+		.then(res => res.data);
 
 	// Pass data to the page via props
 	return {props: {data}};
