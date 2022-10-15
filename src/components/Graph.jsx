@@ -12,6 +12,7 @@ import {
 	Text,
 	Textarea,
 	Button,
+	Flex,
 } from "@chakra-ui/react";
 
 import dynamic from "next/dynamic";
@@ -23,6 +24,7 @@ const Plot = dynamic(() => import("react-plotly.js"), {
 export const Graph = ({data}) => {
 	const {isOpen, onOpen, onClose} = useDisclosure();
 	const [event, setEvent] = useState(null);
+	const [title, setTitle] = useState("teste");
 
 	const [points, setPoints] = useState([]);
 	const [limiar, setLimiar] = useState([]);
@@ -37,14 +39,13 @@ export const Graph = ({data}) => {
 		setPoints([...initPointsGraph(data.dataGraph)]);
 		setLimiar([...initLimiarGraph(data.limiarGraph)]);
 		setLabels([...data.labels]);
+		setTitle(data.title);
 	}, []);
 
 	const createFrameText = frame => {
 		var text = [`Data da coleta: ${frame.x[0]}\n`];
 		frame.hoverLabels.forEach((label, i) => {
-			text.push(
-				`${label}: ${frame.hoverValues[label]} - Limiar: ${frame.limiarData[i]}\n`
-			);
+			text.push(`${label}`);
 		});
 		return text;
 	};
@@ -61,7 +62,7 @@ export const Graph = ({data}) => {
 	const initPointsGraph = data => {
 		data[data.length - 1].line.color = "red";
 		data[data.length - 1].marker.opacity = 1;
-		data[data.length - 1].textfont.color = data[data.length - 1].color;
+		data[data.length - 1].textfont.color = "black";
 
 		return data;
 	};
@@ -80,7 +81,7 @@ export const Graph = ({data}) => {
 				if (i === curvedNumber) {
 					element.line.color = "red";
 					element.marker.opacity = 1;
-					element.textfont.color = element.color;
+					element.textfont.color = "black";
 				} else {
 					element.line.color = "transparent";
 					element.marker.opacity = 0.6;
@@ -111,10 +112,23 @@ export const Graph = ({data}) => {
 			<Plot
 				divId="myChart"
 				data={graph}
+				style={{
+					marginTop: "-15rem",
+				}}
 				layout={{
 					width: 800,
-					height: 800,
+					height: 900,
 					uirevision: true,
+					autosize: true,
+					title: {
+						text: title,
+						position: "bottom",
+						y: "0.78",
+						font: {
+							size: 30,
+						},
+					},
+
 					scene: {
 						xaxis: {
 							zeroline: false,
@@ -184,7 +198,34 @@ export const Graph = ({data}) => {
 					<ModalBody>
 						{event &&
 							event.map((e, i) => {
-								return <Text key={i}>{e}</Text>;
+								if (i === 0) {
+									return (
+										<Flex
+											direction="row"
+											justify="center"
+											align="center">
+											<Text key={i} fontWeight="bold">
+												{e}
+											</Text>
+										</Flex>
+									);
+								}
+								return (
+									<Flex
+										display="flex"
+										flexDirection="row"
+										justifyContent="space-between"
+										align="center">
+										<Text key={i}>{e}</Text>
+										<Button
+											colorScheme="blue"
+											marginTop={5}
+											mr={3}
+											onClick={onClose}>
+											Abrir Coleção
+										</Button>
+									</Flex>
+								);
 							})}
 						<Text marginTop="10px" fontWeight="bold">
 							Observações:

@@ -89,6 +89,7 @@ export const Unpack = (row, labels) => {
 		lZ.push(lZ[0]);
 
 		result.push({
+			title: Object.keys(row[0])[0],
 			hoverLabels: labelsList,
 			hoverValues: values,
 			x: arrX,
@@ -122,6 +123,7 @@ export const generateGraph = data => {
 	const limiar = [];
 	const labels = data[data.length - 1];
 	const graphLabels = [];
+	const title = data[0].title;
 
 	data.forEach(element => {
 		points.push({
@@ -148,14 +150,9 @@ export const generateGraph = data => {
 				color: "transparent",
 				opacity: 1,
 			},
-
+			hoverinfo: "none",
 			showlegend: false,
-			// hovertemplate: `<b>Data da coleta: %{x}</b>
-			// ${createHoverLabels(
-			// 	element.hoverLabels,
-			// 	element.hoverValues,
-			// 	element.limiarData
-			// )}`,
+
 			hoverlabel: {
 				bgcolor: "transparent",
 			},
@@ -178,56 +175,14 @@ export const generateGraph = data => {
 				color: element.limiarColor,
 				width: 7,
 			},
-			hovertemplate: `<b>Data da coleta: %{x}</b>
-			${createHoverLabels(
-				element.hoverLabels,
-				element.hoverValues,
-				element.limiarData
-			)}`,
-			hoverlabel: {
-				bgcolor: "#FFF",
-			},
+
 			showlegend: false,
-			projection: {
-				x: {
-					show: false,
-				},
-			},
+			hoverinfo: "none",
 		});
 	});
 
-	// graphLabels.push({
-	// 	id: "Label",
-	// 	frame: labels,
-	// 	x: labels.limiarX,
-	// 	y: labels.limiarY,
-	// 	z: labels.limiarZ,
-	// 	type: "scatter3d",
-	// 	mode: "text",
-	// 	text: {
-	// 		font_size: 50,
-	// 		font_family: "Rockwell",
-	// 	},
-	// 	text: [...labels.hoverLabels],
-	// 	showlegend: false,
-	// 	hovertemplate: `<b>Data da coleta: %{x}</b>
-	//     ${createHoverLabels(
-	// 		labels.hoverLabels,
-	// 		labels.hoverValues,
-	// 		labels.limiarData
-	// 	)}`,
-	// 	hoverlabel: {
-	// 		bgcolor: "#FFF",
-	// 	},
-	// 	projection: {
-	// 		x: {
-	// 			show: false,
-	// 		},
-	// 	},
-	// 	visible: false,
-	// });
-
 	return {
+		title: title,
 		dataGraph: points,
 		limiarGraph: limiar,
 		labels: graphLabels,

@@ -15,7 +15,7 @@ export const Tab3Template = ({data}) => {
 			justify="flex-start"
 			margin="15px"
 			direction="column">
-			<Frequency selected={frequency} onSelect={setFrequency} />
+			{/* <Frequency selected={frequency} onSelect={setFrequency} /> */}
 
 			<Graph data={data} />
 		</Flex>

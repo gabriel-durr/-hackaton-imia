@@ -9,7 +9,8 @@ export const Frequency = ({selected, onSelect}) => {
 			align="flex-start"
 			justify="flex-end"
 			marginTop="20px"
-			marginRight="35em">
+			marginRight="35em"
+			position="absolute">
 			<Button
 				variant="outline"
 				flexDirection="column"
