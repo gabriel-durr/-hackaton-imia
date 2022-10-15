@@ -123,22 +123,22 @@ export const StatusTab = ({list, resultStatus}) => {
 				spacing="4"
 				align="center"
 				justify="center">
-				<Button w="200px" onClick={handleNewFormula}>
+				<Button w="160px" onClick={handleNewFormula}>
 					<Icon w="5" h="5" as={BsPlusCircleFill} />
 					<Text
 						as="span"
-						fontSize="1.05rem"
+						fontSize="1rem"
 						ml="10px"
 						textTransform="uppercase">
 						Fórmulas
 					</Text>
 				</Button>
 
-				<Button w="200px" onClick={handleNewData}>
+				<Button w="160px" onClick={handleNewData}>
 					<Icon w="5" h="5" as={BsPlusCircleFill} />
 					<Text
 						as="span"
-						fontSize="1.05rem"
+						fontSize="1rem"
 						ml="10px"
 						textTransform="uppercase">
 						Dados
@@ -160,8 +160,8 @@ export const StatusTab = ({list, resultStatus}) => {
 					},
 				}}>
 				{formula.qdts.map((qdt, index) => (
-					<HStack key={index} align="flex-end">
-						<FormControl w={qdt > 1 ? "190px" : "232px"}>
+					<HStack key={index} align="flex-end" spacing="6">
+						<FormControl w={qdt > 1 ? "187px" : "232px"}>
 							<FormLabel
 								fontWeight="bold"
 								fontSize="1.2rem"
@@ -182,6 +182,7 @@ export const StatusTab = ({list, resultStatus}) => {
 						</FormControl>
 						{qdt > 1 && (
 							<IconButton
+								size="sm"
 								color="red.400"
 								_hover={{
 									color: "red",
@@ -193,8 +194,8 @@ export const StatusTab = ({list, resultStatus}) => {
 					</HStack>
 				))}
 				{data.qdts.map((qdt, index) => (
-					<HStack key={index} align="flex-end">
-						<FormControl w={qdt > 1 ? "190px" : "232px"}>
+					<HStack key={index} align="flex-end" spacing="6">
+						<FormControl w={qdt > 1 ? "187px" : "232px"}>
 							<FormLabel
 								fontWeight="bold"
 								fontSize="1.2rem"
@@ -216,6 +217,7 @@ export const StatusTab = ({list, resultStatus}) => {
 						</FormControl>
 						{qdt > 1 && (
 							<IconButton
+								size="sm"
 								color="red.400"
 								_hover={{
 									color: "red",
