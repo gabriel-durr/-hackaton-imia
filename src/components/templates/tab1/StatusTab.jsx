@@ -230,21 +230,23 @@ export const StatusTab = ({list, resultStatus}) => {
 				))}
 			</VStack>
 
-			<Button
-				pos="absolute"
-				bottom="2"
-				right="7"
-				colorScheme="cyan"
-				loadingText="Salvando"
-				rounded="lg"
-				isLoading={isLoading}
-				onClick={() => handleSaveList()}
-				color="#fff"
-				w="170px"
-				h="37px"
-				fontWeight="bold">
-				Salvar
-			</Button>
+			{!!list.length && (
+				<Button
+					pos="absolute"
+					bottom="2"
+					right="7"
+					colorScheme="cyan"
+					loadingText="Salvando"
+					rounded="lg"
+					isLoading={isLoading}
+					onClick={() => handleSaveList()}
+					color="#fff"
+					w="170px"
+					h="37px"
+					fontWeight="bold">
+					Salvar
+				</Button>
+			)}
 		</Flex>
 	);
 };

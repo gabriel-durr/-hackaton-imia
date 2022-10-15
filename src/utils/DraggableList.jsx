@@ -194,7 +194,7 @@ export const DraggableList = ({list, setItemList, endList, setEndList}) => {
 								index={index}>
 								{(provided, snapshot) => (
 									<Box
-										p="7px"
+										p="5px"
 										pos="relative"
 										minW="200px"
 										shadow="lg"
