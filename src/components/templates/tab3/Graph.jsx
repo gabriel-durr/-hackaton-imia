@@ -208,22 +208,22 @@ export const Graph = ({data}) => {
 								if (i === 0) {
 									return (
 										<Flex
+											key={i}
 											direction="row"
 											justify="center"
 											align="center">
-											<Text key={i} fontWeight="bold">
-												{e}
-											</Text>
+											<Text fontWeight="bold">{e}</Text>
 										</Flex>
 									);
 								}
 								return (
 									<Flex
+										key={i}
 										display="flex"
 										flexDirection="row"
 										justifyContent="space-between"
 										align="center">
-										<Text key={i}>{e}</Text>
+										<Text>{e}</Text>
 										<Button
 											colorScheme="blue"
 											marginTop={5}
