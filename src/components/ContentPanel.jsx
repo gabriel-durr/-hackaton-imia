@@ -9,26 +9,20 @@ export const ContentPanel = ({selectedTemplate, tab1, tab2, tab3}) => {
 				return tab2;
 			case "TAB3":
 				return tab3;
-			default:
-				return null;
 		}
 	};
 
 	return (
 		<Flex
 			h="45rem"
-			w="60rem"
 			boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
+			w="80rem"
+			shadow="dark-lg"
 			align="center"
 			justify="flex-start"
 			p="2rem 1rem"
-			overflow="scroll"
-			sx={{
-				"&::-webkit-scrollbar": {
-					width: "0px",
-				},
-			}}
-			marginTop="20px"
+			overflow="hidden"
+			mt="20px"
 			direction="column">
 			<Template selected={selectedTemplate} />
 		</Flex>

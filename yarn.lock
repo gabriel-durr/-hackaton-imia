@@ -3617,9 +3617,9 @@ next-tick@^1.1.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
   integrity sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==
 
-next@12.3.1:
+next@^12.3.1:
   version "12.3.1"
-  resolved "https://registry.npmjs.org/next/-/next-12.3.1.tgz"
+  resolved "https://registry.yarnpkg.com/next/-/next-12.3.1.tgz#127b825ad2207faf869b33393ec8c75fe61e50f1"
   integrity sha512-l7bvmSeIwX5lp07WtIiP9u2ytZMv7jIeB8iacR28PuUEFG5j0HGAPnMqyG5kbZNBG2H7tRsrQ4HCjuMOPnANZw==
   dependencies:
     "@next/env" "12.3.1"
@@ -3866,10 +3866,10 @@ picomatch@^2.3.1:
   resolved "https://registry.npmjs.org/picomatch/-/picomatch-2.3.1.tgz"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
-plotly.js@^2.14.0:
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.14.0.tgz#082fbaad893f20bf083fac982755b36699ff052c"
-  integrity sha512-bv3Re8FmgVJOyIFidAc24mbKLZQ/y/xEFWoFhJMAIpl9pPrB9I6OjAv/gYCKEraWj4VTK5nAPAOGnjcDjodf2g==
+plotly.js@^2.15.1:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/plotly.js/-/plotly.js-2.15.1.tgz#5e92608a3bddf3dbd937b00674bf16adf44a1ef3"
+  integrity sha512-mqOCtVjuCwiLPAgHxzRrvzHYzi3TN5PKWgYox1hSHrXt7D8J3Jmh4ONpyQI/tLk1GsR50LTTb//5LnnaRA0HvQ==
   dependencies:
     "@plotly/d3" "3.8.0"
     "@plotly/d3-sankey" "0.7.2"
@@ -4157,6 +4157,11 @@ react-style-singleton@^2.2.1:
     get-nonce "^1.0.0"
     invariant "^2.2.4"
     tslib "^2.0.0"
+
+react-uuid@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-uuid/-/react-uuid-1.0.3.tgz#77418d1ebd29b4c4ab8e457272887d489aa87836"
+  integrity sha512-cw6Rr6JphvsdK4xHPGBjKD7XSH6Y6i4NJFWUO3OiDd7NLcR8xVeQ3CfeKm7h+S5tpZZVfbH3Tkrz/ydsIiV8pA==
 
 react@18.2.0:
   version "18.2.0"
