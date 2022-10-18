@@ -27,11 +27,13 @@ import {
 	Textarea,
 	Spinner,
 	Button,
+	Flex,
 } from "@chakra-ui/react";
 
 export const Graph = ({data}) => {
 	const {isOpen, onOpen, onClose} = useDisclosure();
 	const [event, setEvent] = useState(null);
+	const [title, setTitle] = useState("teste");
 
 	const [points, setPoints] = useState([]);
 	const [limiar, setLimiar] = useState([]);
@@ -44,14 +46,13 @@ export const Graph = ({data}) => {
 		setPoints([...initPointsGraph(data.dataGraph)]);
 		setLimiar([...initLimiarGraph(data.limiarGraph)]);
 		setLabels([...data.labels]);
+		setTitle(data.title);
 	}, []);
 
 	const createFrameText = frame => {
 		var text = [`Data da coleta: ${frame.x[0]}\n`];
 		frame.hoverLabels.forEach((label, i) => {
-			text.push(
-				`${label}: ${frame.hoverValues[label]} - Limiar: ${frame.limiarData[i]}\n`
-			);
+			text.push(`${label}`);
 		});
 		return text;
 	};
@@ -68,6 +69,7 @@ export const Graph = ({data}) => {
 	const initPointsGraph = data => {
 		data[data.length - 1].line.color = "red";
 		data[data.length - 1].marker.opacity = 1;
+		data[data.length - 1].textfont.color = "black";
 
 		return data;
 	};
@@ -86,9 +88,11 @@ export const Graph = ({data}) => {
 				if (i === curvedNumber) {
 					element.line.color = "red";
 					element.marker.opacity = 1;
+					element.textfont.color = "black";
 				} else {
 					element.line.color = "transparent";
 					element.marker.opacity = 0.6;
+					element.textfont.color = "transparent";
 				}
 			});
 			dataLimiar.forEach((element, i) => {
@@ -115,10 +119,53 @@ export const Graph = ({data}) => {
 			<Plot
 				divId="myChart"
 				data={graph}
+				style={{
+					marginTop: "-15rem",
+				}}
 				layout={{
 					width: 800,
-					height: 800,
+					height: 900,
 					uirevision: true,
+					autosize: true,
+					title: {
+						text: title,
+						position: "bottom",
+						y: "0.78",
+						font: {
+							size: 30,
+						},
+					},
+
+					scene: {
+						xaxis: {
+							zeroline: false,
+							showgrid: false,
+							visible: true,
+							showticklabels: true,
+							showline: false,
+							showspikes: false,
+							showtickprefix: false,
+							color: "#000",
+						},
+						yaxis: {
+							zeroline: false,
+							showgrid: false,
+							visible: false,
+							showticklabels: false,
+							showline: false,
+							showspikes: false,
+							showtickprefix: false,
+						},
+						zaxis: {
+							zeroline: false,
+							showgrid: false,
+							visible: false,
+							showticklabels: false,
+							showline: false,
+							showspikes: false,
+							showtickprefix: false,
+						},
+					},
 				}}
 				onClick={event => {
 					if (canHover) {
@@ -149,7 +196,6 @@ export const Graph = ({data}) => {
 						}, 50);
 					}
 				}}
-				onDoubleClick={() => console.log("doubleClick")}
 			/>
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
@@ -159,7 +205,34 @@ export const Graph = ({data}) => {
 					<ModalBody>
 						{event &&
 							event.map((e, i) => {
-								return <Text key={i}>{e}</Text>;
+								if (i === 0) {
+									return (
+										<Flex
+											direction="row"
+											justify="center"
+											align="center">
+											<Text key={i} fontWeight="bold">
+												{e}
+											</Text>
+										</Flex>
+									);
+								}
+								return (
+									<Flex
+										display="flex"
+										flexDirection="row"
+										justifyContent="space-between"
+										align="center">
+										<Text key={i}>{e}</Text>
+										<Button
+											colorScheme="blue"
+											marginTop={5}
+											mr={3}
+											onClick={onClose}>
+											Abrir Coleção
+										</Button>
+									</Flex>
+								);
 							})}
 						<Text marginTop="10px" fontWeight="bold">
 							Observações:
