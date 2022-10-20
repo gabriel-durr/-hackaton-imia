@@ -1,6 +1,7 @@
 import {useState} from "react";
-import {Flex, Stack} from "@chakra-ui/react";
+import {Flex, IconButton, Stack} from "@chakra-ui/react";
 import axios from "axios";
+import {ArrowLeftIcon, ArrowRightIcon} from "@chakra-ui/icons";
 
 import {Footer} from "../components/Footer";
 import {Header} from "../components/Header";
@@ -22,32 +23,31 @@ export default function Home({data}) {
 	};
 	return (
 		<Flex
+			pos="relative"
 			w="100vw"
 			h="100vh"
 			justify="space-between"
 			align="center"
 			bg="whiteAlpha.800"
-			direction="column">
+			direction="column"
+			overflow="hidden">
 			<Header />
-			<Stack h="100%" w="100%" maxW="container.xl" align="center">
-			<Graph data={data.graphStruct} />
-				{/* <Tabs
-					selected={selected}
-					onSelect={onSelected}
-					label1="anterior"
-					label2="agora"
-					label3="próximo"
-					icon1={FaStepBackward}
-					icon2={FaDigitalTachograph}
-					icon3={FaStepForward}
-				/> */}
-				{/* <ContentPanel
-					selectedTemplate={selected}
-					tab1={<></>}
-					tab2={}
-					tab3={<></>}
-				/> */}
+
+			<Stack
+				pos="absolute"
+				transform="translate(0%, 23%)"
+				h="670px"
+				w="100%"
+				maxW="container.xl"
+				direction="row"
+				align="center"
+				justify="space-between"
+				boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px">
+				<IconButton icon={<ArrowLeftIcon />} />
+				<Graph data={data.graphStruct} />
+				<IconButton icon={<ArrowRightIcon />} />
 			</Stack>
+
 			<Footer />
 		</Flex>
 	);

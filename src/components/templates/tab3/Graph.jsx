@@ -44,7 +44,7 @@ export const Graph = ({data}) => {
 	var timer;
 
 	useEffect(() => {
-		console.log(data.pointLine)
+		console.log(data.pointLine);
 		setPoints([...data.dataGraph]);
 		setPointLine([...data.pointLine]);
 		setLimiarLine([...data.limiarLine]);
@@ -68,15 +68,27 @@ export const Graph = ({data}) => {
 	};
 
 	//show line on hover
-	const onHoverGraph = (eventData) => {
-		pointLine[0].x = eventData.x.slice(0,eventData.x.length/2,0);
-		pointLine[0].y = eventData.y.slice(0,eventData.y.length/2,0);	
-		pointLine[0].z = eventData.z.slice(0,eventData.z.length/2,0);	
+	const onHoverGraph = eventData => {
+		pointLine[0].x = eventData.x.slice(0, eventData.x.length / 2, 0);
+		pointLine[0].y = eventData.y.slice(0, eventData.y.length / 2, 0);
+		pointLine[0].z = eventData.z.slice(0, eventData.z.length / 2, 0);
 		pointLine[0].text = eventData.text;
 
-		limiarLine[0].x = eventData.x.slice(eventData.x.length/2,eventData.x.length,0);
-		limiarLine[0].y = eventData.y.slice(eventData.y.length/2,eventData.y.length,0);
-		limiarLine[0].z = eventData.z.slice(eventData.z.length/2,eventData.z.length,0);
+		limiarLine[0].x = eventData.x.slice(
+			eventData.x.length / 2,
+			eventData.x.length,
+			0
+		);
+		limiarLine[0].y = eventData.y.slice(
+			eventData.y.length / 2,
+			eventData.y.length,
+			0
+		);
+		limiarLine[0].z = eventData.z.slice(
+			eventData.z.length / 2,
+			eventData.z.length,
+			0
+		);
 
 		setPointLine([...pointLine]);
 		setLimiarLine([...limiarLine]);
@@ -87,37 +99,27 @@ export const Graph = ({data}) => {
 	return (
 		<>
 			<Plot
+				style={{
+					width: "60%",
+					height: "650px",
+				}}
 				divId="myChart"
 				data={graph}
-
-				style={{
-					background: "red",
-					display: "flex",
-					justifyContent: "center",
-					alignContent: "center",
-					width: "100%",
-					height: "100%"
-				}}
-
-
 				layout={{
-				
-				
 					uirevision: true,
-					// autosize: true,
-					// title: {
-					// 	text: title,
-					// 	position: "bottom",
-					// 	y: "0.78",
-						// font: {
-						// 	size: 30,
-						// },
-					// },
-					
+					autosize: true,
+					title: {
+						text: title,
+						position: "bottom",
+						y: "0.78",
+						font: {
+							size: 30,
+						},
+					},
+
 					"xaxis.type": "log",
 
 					scene: {
-
 						xaxis: {
 							zeroline: false,
 							showgrid: false,
@@ -127,11 +129,9 @@ export const Graph = ({data}) => {
 							showspikes: false,
 							showtickprefix: false,
 							color: "#000",
-							range: "100"
-
+							range: "100",
 						},
 						yaxis: {
-							
 							zeroline: false,
 							showgrid: false,
 							visible: false,
@@ -171,10 +171,7 @@ export const Graph = ({data}) => {
 				}}
 				onHover={event => {
 					if (event.points[0].data.id === "points" && canHover) {
-						onHoverGraph(
-								event.points[0].data
-							);
-						
+						onHoverGraph(event.points[0].data);
 					}
 				}}
 			/>
@@ -189,22 +186,22 @@ export const Graph = ({data}) => {
 								if (i === 0) {
 									return (
 										<Flex
+											key={i}
 											direction="row"
 											justify="center"
 											align="center">
-											<Text key={i} fontWeight="bold">
-												{e}
-											</Text>
+											<Text fontWeight="bold">{e}</Text>
 										</Flex>
 									);
 								}
 								return (
 									<Flex
+										key={i}
 										display="flex"
 										flexDirection="row"
 										justifyContent="space-between"
 										align="center">
-										<Text key={i}>{e}</Text>
+										<Text>{e}</Text>
 										<Button
 											colorScheme="blue"
 											marginTop={5}
