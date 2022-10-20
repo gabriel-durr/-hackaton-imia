@@ -30,7 +30,8 @@ export default function Home({data}) {
 			direction="column">
 			<Header />
 			<Stack h="100%" w="100%" maxW="container.xl" align="center">
-				<Tabs
+			<Graph data={data.graphStruct} />
+				{/* <Tabs
 					selected={selected}
 					onSelect={onSelected}
 					label1="anterior"
@@ -39,13 +40,13 @@ export default function Home({data}) {
 					icon1={FaStepBackward}
 					icon2={FaDigitalTachograph}
 					icon3={FaStepForward}
-				/>
-				<ContentPanel
+				/> */}
+				{/* <ContentPanel
 					selectedTemplate={selected}
 					tab1={<></>}
-					tab2={<Graph data={data.graphStruct} />}
+					tab2={}
 					tab3={<></>}
-				/>
+				/> */}
 			</Stack>
 			<Footer />
 		</Flex>
