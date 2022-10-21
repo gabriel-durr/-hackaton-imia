@@ -1,3 +1,4 @@
+import React from "react";
 import {
 	Modal,
 	ModalOverlay,
@@ -13,7 +14,7 @@ import {
 	Flex,
 } from "@chakra-ui/react";
 
-export const ModalGraph = ({event, isOpen, onClose}) => {
+const ModalGraph = ({event, isOpen, onClose}) => {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
 			{console.log("dentro do modal")}
@@ -44,7 +45,7 @@ export const ModalGraph = ({event, isOpen, onClose}) => {
 										colorScheme="blue"
 										marginTop={5}
 										mr={3}
-										onClick={() => onClose}>
+										onClick={onClose}>
 										Abrir Coleção
 									</Button>
 								</Flex>
@@ -59,10 +60,10 @@ export const ModalGraph = ({event, isOpen, onClose}) => {
 					/>
 				</ModalBody>
 				<ModalFooter>
-					<Button colorScheme="blue" mr={3} onClick={() => onClose}>
+					<Button colorScheme="blue" mr={3} onClick={onClose}>
 						Send
 					</Button>
-					<Button colorScheme="red" mr={3} onClick={() => onClose}>
+					<Button colorScheme="red" mr={3} onClick={onClose}>
 						Close
 					</Button>
 				</ModalFooter>
@@ -70,3 +71,5 @@ export const ModalGraph = ({event, isOpen, onClose}) => {
 		</Modal>
 	);
 };
+
+export const MemoizedModal = React.memo(ModalGraph)
