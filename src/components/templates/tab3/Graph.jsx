@@ -61,7 +61,7 @@ export const Graph = ({data}) => {
 
 	const onHandleModal = events => {
 		if (!isOpen) {
-			var modalText = createFrameText(events.points[0].data.frame);
+			var modalText = createFrameText(events.points[0].data);
 			setEvent(modalText);
 			onOpen();
 		}

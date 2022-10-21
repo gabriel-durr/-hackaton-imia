@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Flex, IconButton, Stack} from "@chakra-ui/react";
+import {Flex, IconButton, Button, Icon, Stack, Box} from "@chakra-ui/react";
 import axios from "axios";
 import {ArrowLeftIcon, ArrowRightIcon} from "@chakra-ui/icons";
 
@@ -32,6 +32,10 @@ export default function Home({data}) {
 			direction="column"
 			overflow="hidden">
 			<Header />
+			<Button pos="absolute" left="20" bottom="50%" top="50%">
+				<Icon mr="2" as={ArrowLeftIcon} />
+				Anterior
+			</Button>
 
 			<Stack
 				pos="absolute"
@@ -43,10 +47,13 @@ export default function Home({data}) {
 				align="center"
 				justify="space-between"
 				boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px">
-				<IconButton icon={<ArrowLeftIcon />} />
 				<Graph data={data.graphStruct} />
-				<IconButton icon={<ArrowRightIcon />} />
 			</Stack>
+
+			<Button pos="absolute" right="20" bottom="50%" top="50%">
+				Próximo
+				<Icon ml="2" as={ArrowRightIcon} />
+			</Button>
 
 			<Footer />
 		</Flex>
