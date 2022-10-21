@@ -11,7 +11,7 @@ export const Header = () => {
 			boxShadow="rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px"
 			justify="space-between"
 			bgGradient="linear(90deg, #0a5779 0%,  #1976a2 100%, #21889b 100%)">
-			<Image alt="iMia" src="/i-mia.png" w="290px" h="120px" />
+			<Image alt="iMia" src="/logo_FGM2.png" w="170px" />
 			<Button
 				rounded="full"
 				variant="outline"

@@ -14,7 +14,7 @@ export const ContentPanel = ({selectedTemplate, tab1, tab2, tab3}) => {
 
 	return (
 		<Flex
-			h={["60%", "40rem"]}
+			h="40rem"
 			boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px"
 			w="80rem"
 			shadow="dark-lg"
