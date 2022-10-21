@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, memo} from "react";
 import dynamic from "next/dynamic";
 
 const Plot = dynamic(() => import("react-plotly.js"), {
@@ -41,10 +41,7 @@ export const Graph = ({data}) => {
 	const [canHover, setCanHover] = useState(true);
 	const [lastEvent, setLastEvent] = useState(null);
 
-	var timer;
-
 	useEffect(() => {
-		console.log(data.pointLine)
 		setPoints([...data.dataGraph]);
 		setPointLine([...data.pointLine]);
 		setLimiarLine([...data.limiarLine]);
@@ -52,16 +49,17 @@ export const Graph = ({data}) => {
 	}, []);
 
 	const createFrameText = frame => {
-		var text = [`Data da coleta: ${frame.x[0]}\n`];
-		frame.hoverLabels.forEach((label, i) => {
-			text.push(`${label}`);
+		var title = [`Data da coleta: ${frame.x[0]}\n`];
+		frame.text.forEach((label) => {
+			title.push(`${label}`);
 		});
-		return text;
+		return title;
 	};
 
 	const onHandleModal = events => {
 		if (!isOpen) {
-			var modalText = createFrameText(events.points[0].data.frame);
+			console.log("on open")
+			var modalText = createFrameText(events.points[0].data);
 			setEvent(modalText);
 			onOpen();
 		}
@@ -73,6 +71,7 @@ export const Graph = ({data}) => {
 		pointLine[0].y = eventData.y.slice(0,eventData.y.length/2,0);	
 		pointLine[0].z = eventData.z.slice(0,eventData.z.length/2,0);	
 		pointLine[0].text = eventData.text;
+		pointLine[0].textfont.size = 30;
 
 		limiarLine[0].x = eventData.x.slice(eventData.x.length/2,eventData.x.length,0);
 		limiarLine[0].y = eventData.y.slice(eventData.y.length/2,eventData.y.length,0);
@@ -152,10 +151,12 @@ export const Graph = ({data}) => {
 					},
 				}}
 				onClick={event => {
+					console.log("click")
 					if (canHover) {
 						let timer;
 						clearTimeout(timer);
 						timer = setTimeout(() => {
+							console.log("opa1")
 							setCanHover(false);
 							setLastEvent(event);
 						}, 300);
@@ -179,32 +180,32 @@ export const Graph = ({data}) => {
 				}}
 			/>
 			<Modal isOpen={isOpen} onClose={onClose}>
+				{console.log("dentro do modal")}
 				<ModalOverlay />
 				<ModalContent>
 					<ModalHeader>Dados do evento</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-						{event &&
+						{!!event &&
 							event.map((e, i) => {
-								if (i === 0) {
-									return (
-										<Flex
-											direction="row"
-											justify="center"
-											align="center">
-											<Text key={i} fontWeight="bold">
-												{e}
-											</Text>
-										</Flex>
-									);
-								}
-								return (
+								return i === 0 ? 
 									<Flex
+										key={i}
+										direction="row"
+										justify="center"
+										align="center">
+										<Text fontWeight="bold">
+											{e}
+										</Text>
+									</Flex>
+								:
+									<Flex
+										key={i}
 										display="flex"
 										flexDirection="row"
 										justifyContent="space-between"
 										align="center">
-										<Text key={i}>{e}</Text>
+										<Text>{e}</Text>
 										<Button
 											colorScheme="blue"
 											marginTop={5}
@@ -213,7 +214,7 @@ export const Graph = ({data}) => {
 											Abrir Coleção
 										</Button>
 									</Flex>
-								);
+								
 							})}
 						<Text marginTop="10px" fontWeight="bold">
 							Observações:
