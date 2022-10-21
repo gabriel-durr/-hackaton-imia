@@ -17,7 +17,7 @@ const Plot = dynamic(() => import("react-plotly.js"), {
 import {Spinner, useDisclosure} from "@chakra-ui/react";
 import {ModalGraph} from "./ModalGraph";
 
-export const Graph = ({data}) => {
+export const Graph = ({data, page}) => {
 	const {isOpen, onOpen, onClose} = useDisclosure();
 	const [event, setEvent] = useState(null);
 	const [title, setTitle] = useState("teste");
@@ -27,6 +27,16 @@ export const Graph = ({data}) => {
 	const [limiarLine, setLimiarLine] = useState([]);
 	const [canHover, setCanHover] = useState(true);
 	const [lastEvent, setLastEvent] = useState(null);
+	const [figure, setFigure] = useState(null);
+
+	const [render, setRender] = useState(true);
+
+	useEffect(() => {
+		setRender(false);
+		setTimeout(() => {
+			setRender(true);
+		}, 200);
+	}, [data]);
 
 	useEffect(() => {
 		setPoints([...data.dataGraph]);
@@ -58,7 +68,7 @@ export const Graph = ({data}) => {
 		pointLine[0].y = eventData.y.slice(0, eventData.y.length / 2, 0);
 		pointLine[0].z = eventData.z.slice(0, eventData.z.length / 2, 0);
 		pointLine[0].text = eventData.text;
-		pointLine[0].textfont.size = 30;
+		// pointLine[0].textfont.size = 20;
 
 		limiarLine[0].x = eventData.x.slice(
 			eventData.x.length / 2,
@@ -84,86 +94,105 @@ export const Graph = ({data}) => {
 
 	return (
 		<>
-			<Plot
-				style={{
-					height: "100%",
-					width: "100%",
-				}}
-				divId="myChart"
-				data={graph}
-				layout={{
-					uirevision: true,
-					autosize: true,
-					title: {
-						text: title,
-						position: "bottom",
-						y: "0.78",
-						font: {
-							size: 30,
-						},
-					},
+			{render ? (
+				<>
+					<Plot
+						style={{
+							height: "100%",
+							width: "100%",
+						}}
+						divId="myChart"
+						data={graph}
+						layout={{
+							uirevision: true,
+							datarevision: page,
+							autosize: true,
+							title: {
+								text: title,
+								position: "bottom",
+								y: "0.78",
+							},
 
-					"xaxis.type": "log",
+							"xaxis.type": "date",
 
-					scene: {
-						xaxis: {
-							zeroline: false,
-							showgrid: false,
-							visible: true,
-							showticklabels: true,
-							showline: false,
-							showspikes: false,
-							showtickprefix: false,
-							color: "#000",
-							range: "100",
-						},
-						yaxis: {
-							zeroline: false,
-							showgrid: false,
-							visible: false,
-							showticklabels: false,
-							showline: false,
-							showspikes: false,
-							showtickprefix: false,
-						},
-						zaxis: {
-							zeroline: false,
-							showgrid: false,
-							visible: false,
-							showticklabels: false,
-							showline: false,
-							showspikes: false,
-							showtickprefix: false,
-						},
-					},
-				}}
-				onClick={event => {
-					console.log("click");
-					if (canHover) {
-						let timer;
-						clearTimeout(timer);
-						timer = setTimeout(() => {
-							console.log("opa1");
-							setCanHover(false);
-							setLastEvent(event);
-						}, 300);
-					} else {
-						let timer;
-						clearTimeout(timer);
-						timer = setTimeout(() => {
-							console.log("opa");
-							onHandleModal(lastEvent);
-						}, 500);
-					}
-				}}
-				onHover={event => {
-					if (event.points[0].data.id === "points" && canHover) {
-						onHoverGraph(event.points[0].data);
-					}
-				}}
-			/>
+							scene: {
+								xaxis: {
+									zeroline: false,
+									showgrid: false,
+									visible: true,
+									showticklabels: true,
+									showline: false,
+									showspikes: false,
+									showtickprefix: false,
+									color: "#000",
+									range: "100",
+								},
+								yaxis: {
+									zeroline: false,
+									showgrid: false,
+									visible: false,
+									showticklabels: false,
+									showline: false,
+									showspikes: false,
+									showtickprefix: false,
+								},
+								zaxis: {
+									zeroline: false,
+									showgrid: false,
+									visible: false,
+									showticklabels: false,
+									showline: false,
+									showspikes: false,
+									showtickprefix: false,
+								},
+							},
+						}}
+						onClick={event => {
+							console.log("click");
+							if (canHover) {
+								let timer;
+								clearTimeout(timer);
+								timer = setTimeout(() => {
+									console.log("opa1");
+									setCanHover(false);
+									setLastEvent(event);
+								}, 300);
+							} else {
+								let timer;
+								clearTimeout(timer);
+								timer = setTimeout(() => {
+									console.log("opa");
+									onHandleModal(lastEvent);
+								}, 500);
+							}
+						}}
+						onHover={event => {
+							if (
+								event.points[0].data.id === "points" &&
+								canHover
+							) {
+								onHoverGraph(event.points[0].data);
+							}
+						}}
+						// onInitialized={figure => setFigure(figure)}
+						// onUpdate={figure => setFigure(figure)}
+					/>
 
-			<ModalGraph event={event} isOpen={isOpen} onCLose={onClose} />
+					<ModalGraph
+						event={event}
+						isOpen={isOpen}
+						onCLose={onClose}
+					/>
+				</>
+			) : (
+				<Spinner
+					thickness="4px"
+					speed="0.65s"
+					emptyColor="gray.200"
+					color="blue.500"
+					size="xl"
+				/>
+			)}
 		</>
 	);
 };

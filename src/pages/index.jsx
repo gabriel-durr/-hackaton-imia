@@ -7,14 +7,25 @@ import {Header} from "../components/Header";
 
 import {Graph} from "../components/templates/tab3/Graph";
 
-export default function Home({data}) {
-	const [dataApi, setDataApi] = useState(data);
-	const [page, setPage] = useState(data.page);
+export default function Home({}) {
+	const [dataApi, setDataApi] = useState(null);
+	const [page, setPage] = useState(1);
+
+	useEffect(() => {
+		axios
+			.get("https://hackacton-imia.herokuapp.com")
+			.then(res => setDataApi(res.data));
+	}, [page]);
 
 	function handleBack() {
-		axios.post(dataApi, {
-			page: page,
-		});
+		axios
+			.post("https://hackacton-imia.herokuapp.com/next", {
+				page: page,
+			})
+			.then(res => {
+				setDataApi(res.data);
+				setPage(res.data.page);
+			});
 	}
 
 	return (
@@ -34,7 +45,8 @@ export default function Home({data}) {
 				rounded="full"
 				bottom="50%"
 				top="50%"
-				fontSize="1.1rem">
+				fontSize="1.1rem"
+				onClick={handleBack}>
 				<Image mr="2" src="back.svg" alt="Voltar" w="12" />
 			</Button>
 
@@ -45,12 +57,10 @@ export default function Home({data}) {
 				w="90%"
 				maxW="container.xl"
 				direction="row"
-				align="flex-start"
+				align="center"
 				justify="center"
 				boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px">
-				<Box w="100%" h="100%">
-					<Graph data={dataApi.graphStruct} />
-				</Box>
+				{dataApi && <Graph data={dataApi.graphStruct} page={page} />}
 			</Stack>
 
 			<Button
@@ -67,13 +77,13 @@ export default function Home({data}) {
 	);
 }
 
-export async function getStaticProps() {
-	// Fetch data from external API
+// export async function getServerSideProps() {
+// 	// Fetch data from external API
 
-	let data = await axios
-		.get(`https://hackacton-imia.herokuapp.com/`)
-		.then(res => res.data);
+// 	let data = await axios
+// 		.get(`https://hackacton-imia.herokuapp.com/`)
+// 		.then(res => res.data);
 
-	// Pass data to the page via props
-	return {props: {data}};
-}
+// 	// Pass data to the page via props
+// 	return {props: {data}};
+// }
