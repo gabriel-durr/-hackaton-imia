@@ -86,8 +86,8 @@ export const Graph = ({data}) => {
 		<>
 			<Plot
 				style={{
-					width: "60%",
-					height: "650px",
+					height: "100%",
+					width: "100%",
 				}}
 				divId="myChart"
 				data={graph}

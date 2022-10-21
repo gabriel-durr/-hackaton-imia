@@ -1,26 +1,12 @@
-import {useState} from "react";
-import {Flex, IconButton, Button, Icon, Stack, Box} from "@chakra-ui/react";
+import {Flex, Button, Image, Stack, Box} from "@chakra-ui/react";
 import axios from "axios";
-import {ArrowLeftIcon, ArrowRightIcon} from "@chakra-ui/icons";
 
 import {Footer} from "../components/Footer";
 import {Header} from "../components/Header";
-import {Tabs} from "../components/Tabs";
-import {ContentPanel} from "../components/ContentPanel";
 
-import {
-	FaStepBackward,
-	FaStepForward,
-	FaDigitalTachograph,
-} from "react-icons/fa";
 import {Graph} from "../components/templates/tab3/Graph";
 
 export default function Home({data}) {
-	const [selected, setSelected] = useState("TAB2");
-
-	const onSelected = selected => {
-		setSelected(selected);
-	};
 	return (
 		<Flex
 			pos="relative"
@@ -32,27 +18,32 @@ export default function Home({data}) {
 			direction="column"
 			overflow="hidden">
 			<Header />
-			<Button pos="absolute" left="20" bottom="50%" top="50%">
-				<Icon mr="2" as={ArrowLeftIcon} />
-				Anterior
+			<Button
+				pos="absolute"
+				left="20"
+				bottom="50%"
+				top="50%"
+				fontSize="1.1rem">
+				<Image mr="2" src="back.svg" alt="Voltar" w="12" />
 			</Button>
 
 			<Stack
 				pos="absolute"
 				transform="translate(0%, 23%)"
-				h="670px"
-				w="100%"
+				h="620px"
+				w="90%"
 				maxW="container.xl"
 				direction="row"
-				align="center"
-				justify="space-between"
+				align="flex-start"
+				justify="center"
 				boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px">
-				<Graph data={data.graphStruct} />
+				<Box w="100%" h="100%">
+					<Graph data={data.graphStruct} />
+				</Box>
 			</Stack>
 
 			<Button pos="absolute" right="20" bottom="50%" top="50%">
-				Próximo
-				<Icon ml="2" as={ArrowRightIcon} />
+				<Image ml="2" src="/next.svg" alt="Próximo" w="12" />
 			</Button>
 
 			<Footer />
@@ -62,8 +53,9 @@ export default function Home({data}) {
 
 export async function getStaticProps() {
 	// Fetch data from external API
+
 	let data = await axios
-		.get("https://hackacton-imia.herokuapp.com/")
+		.get(`https://hackacton-imia.herokuapp.com/`)
 		.then(res => res.data);
 
 	// Pass data to the page via props
