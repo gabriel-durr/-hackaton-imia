@@ -15,7 +15,7 @@ const Plot = dynamic(() => import("react-plotly.js"), {
 });
 
 import {Spinner, useDisclosure} from "@chakra-ui/react";
-import {ModalGraph} from "./ModalGraph";
+import {MemoizedModal} from "./ModalGraph";
 
 export const Graph = ({data, page}) => {
 	const {isOpen, onOpen, onClose} = useDisclosure();
@@ -89,6 +89,11 @@ export const Graph = ({data, page}) => {
 		setPointLine([...pointLine]);
 		setLimiarLine([...limiarLine]);
 	};
+
+	const closeModal = () => {
+		onClose();
+		setCanHover(true);
+	}
 
 	var graph = [...points, ...pointLine, ...limiarLine];
 
@@ -178,21 +183,7 @@ export const Graph = ({data, page}) => {
 						// onUpdate={figure => setFigure(figure)}
 					/>
 
-					<ModalGraph
-						event={event}
-						isOpen={isOpen}
-						onCLose={onClose}
-					/>
-				</>
-			) : (
-				<Spinner
-					thickness="4px"
-					speed="0.65s"
-					emptyColor="gray.200"
-					color="blue.500"
-					size="xl"
-				/>
-			)}
+			<MemoizedModal event={event} isOpen={isOpen} onClose={() => closeModal()} />
 		</>
 	);
 };
