@@ -15,11 +15,22 @@ export default function Home({}) {
 		axios
 			.get("https://hackacton-imia.herokuapp.com")
 			.then(res => setDataApi(res.data));
-	}, [page]);
+	}, []);
+
+	function handleForward() {
+		axios
+			.post("https://hackacton-imia.herokuapp.com/next", {
+				page: page,
+			})
+			.then(res => {
+				setDataApi(res.data);
+				setPage(res.data.page);
+			});
+	}
 
 	function handleBack() {
 		axios
-			.post("https://hackacton-imia.herokuapp.com/next", {
+			.post("https://hackacton-imia.herokuapp.com/prev", {
 				page: page,
 			})
 			.then(res => {
@@ -60,7 +71,9 @@ export default function Home({}) {
 				align="center"
 				justify="center"
 				boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px">
-				{dataApi && <Graph data={dataApi.graphStruct} page={page} />}
+				{dataApi && (
+					<Graph data={dataApi.graphStruct} title={dataApi.title} />
+				)}
 			</Stack>
 
 			<Button
@@ -68,7 +81,8 @@ export default function Home({}) {
 				right="20"
 				bottom="50%"
 				top="50%"
-				rounded="full">
+				rounded="full"
+				onClick={handleForward}>
 				<Image ml="2" src="/next.svg" alt="Próximo" w="12" />
 			</Button>
 

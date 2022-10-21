@@ -17,6 +17,7 @@ import {
 const ModalGraph = ({event, isOpen, onClose}) => {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
+			{console.log(event)}
 			{console.log("dentro do modal")}
 			<ModalOverlay />
 			<ModalContent>
@@ -72,4 +73,4 @@ const ModalGraph = ({event, isOpen, onClose}) => {
 	);
 };
 
-export const MemoizedModal = React.memo(ModalGraph)
+export const MemoizedModal = React.memo(ModalGraph);

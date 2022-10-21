@@ -9,7 +9,7 @@ import {
 	Button,
 	useToast,
 } from "@chakra-ui/react";
-import {EditableItem} from "../../../utils/EditableItem";
+import {EditableItem} from "../../EditableItem";
 
 export const ActionsTab = ({process, setProcess}) => {
 	const toast = useToast();

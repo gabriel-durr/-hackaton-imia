@@ -1,6 +1,5 @@
 import {HStack, Box, IconButton, Text, VStack, Image} from "@chakra-ui/react";
 import {motion} from "framer-motion";
-import uuid from "react-uuid";
 
 import {IoMdCloseCircle} from "react-icons/io";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";

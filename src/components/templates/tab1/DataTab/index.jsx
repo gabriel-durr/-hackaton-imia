@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {Flex, Button, Stack, VStack, useToast} from "@chakra-ui/react";
-import {Dropzone} from "../../../utils/Dropzone";
-import {DraggableList} from "../../../utils/DraggableList";
-import {EditableItem} from "../../../utils/EditableItem";
+import {Dropzone} from "./Dropzone";
+import {DraggableList} from "./DraggableList";
+import {EditableItem} from "../../../EditableItem";
 
 export const DataTab = ({data, resultList}) => {
 	const [title, setTitle] = useState("Titulo da Coleção");

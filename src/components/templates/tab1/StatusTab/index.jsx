@@ -13,8 +13,8 @@ import {
 } from "@chakra-ui/react";
 import {BsPlusCircleFill, BsFillDashSquareFill} from "react-icons/bs";
 import {useState} from "react";
-import {EditableItem} from "../../../utils/EditableItem";
-import {DraggableStatus} from "../../../utils/DraggableStatus";
+import {EditableItem} from "../../../EditableItem";
+import {DraggableStatus} from "./DraggableStatus";
 
 export const StatusTab = ({list, resultStatus}) => {
 	const toast = useToast();

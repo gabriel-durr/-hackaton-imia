@@ -17,33 +17,25 @@ const Plot = dynamic(() => import("react-plotly.js"), {
 import {Spinner, useDisclosure} from "@chakra-ui/react";
 import {MemoizedModal} from "./ModalGraph";
 
-export const Graph = ({data, page}) => {
+export const Graph = ({data, title}) => {
+	const [graph, setGraph] = useState(null);
 	const {isOpen, onOpen, onClose} = useDisclosure();
 	const [event, setEvent] = useState(null);
-	const [title, setTitle] = useState("teste");
+	const [graphTitle, setGraphTitle] = useState("");
 
 	const [points, setPoints] = useState([]);
 	const [pointLine, setPointLine] = useState([]);
 	const [limiarLine, setLimiarLine] = useState([]);
 	const [canHover, setCanHover] = useState(true);
 	const [lastEvent, setLastEvent] = useState(null);
-	const [figure, setFigure] = useState(null);
-
-	const [render, setRender] = useState(true);
-
-	useEffect(() => {
-		setRender(false);
-		setTimeout(() => {
-			setRender(true);
-		}, 200);
-	}, [data]);
 
 	useEffect(() => {
 		setPoints([...data.dataGraph]);
 		setPointLine([...data.pointLine]);
 		setLimiarLine([...data.limiarLine]);
-		setTitle(data.title);
-	}, []);
+		setGraphTitle(title);
+		setGraph([...data.dataGraph, ...data.pointLine, ...data.limiarLine]);
+	}, [data, title]);
 
 	const createFrameText = frame => {
 		var title = [`Data da coleta: ${frame.x[0]}\n`];
@@ -54,7 +46,7 @@ export const Graph = ({data, page}) => {
 	};
 
 	const onHandleModal = events => {
-		if (!isOpen) {
+		if (!isOpen && !canHover) {
 			console.log("on open");
 			var modalText = createFrameText(events.points[0].data);
 			setEvent(modalText);
@@ -93,97 +85,95 @@ export const Graph = ({data, page}) => {
 	const closeModal = () => {
 		onClose();
 		setCanHover(true);
-	}
-
-	var graph = [...points, ...pointLine, ...limiarLine];
+	};
 
 	return (
 		<>
-			{render ? (
-				<>
-					<Plot
-						style={{
-							height: "100%",
-							width: "100%",
-						}}
-						divId="myChart"
-						data={graph}
-						layout={{
-							uirevision: true,
-							datarevision: page,
-							autosize: true,
-							title: {
-								text: title,
-								position: "bottom",
-								y: "0.78",
-							},
+			<Plot
+				style={{
+					height: "100%",
+					width: "100%",
+				}}
+				divId="myChart"
+				data={graph}
+				layout={{
+					uirevision: true,
+					autosize: true,
+					title: {
+						text: graphTitle,
+						position: "bottom",
+						y: "0.9",
+						font: {
+							size: 30,
+							weight: "bold",
+						},
+					},
 
-							"xaxis.type": "date",
+					"xaxis.type": "date",
 
-							scene: {
-								xaxis: {
-									zeroline: false,
-									showgrid: false,
-									visible: true,
-									showticklabels: true,
-									showline: false,
-									showspikes: false,
-									showtickprefix: false,
-									color: "#000",
-									range: "100",
-								},
-								yaxis: {
-									zeroline: false,
-									showgrid: false,
-									visible: false,
-									showticklabels: false,
-									showline: false,
-									showspikes: false,
-									showtickprefix: false,
-								},
-								zaxis: {
-									zeroline: false,
-									showgrid: false,
-									visible: false,
-									showticklabels: false,
-									showline: false,
-									showspikes: false,
-									showtickprefix: false,
-								},
-							},
-						}}
-						onClick={event => {
-							console.log("click");
-							if (canHover) {
-								let timer;
-								clearTimeout(timer);
-								timer = setTimeout(() => {
-									console.log("opa1");
-									setCanHover(false);
-									setLastEvent(event);
-								}, 300);
-							} else {
-								let timer;
-								clearTimeout(timer);
-								timer = setTimeout(() => {
-									console.log("opa");
-									onHandleModal(lastEvent);
-								}, 500);
-							}
-						}}
-						onHover={event => {
-							if (
-								event.points[0].data.id === "points" &&
-								canHover
-							) {
-								onHoverGraph(event.points[0].data);
-							}
-						}}
-						// onInitialized={figure => setFigure(figure)}
-						// onUpdate={figure => setFigure(figure)}
-					/>
+					scene: {
+						xaxis: {
+							zeroline: false,
+							showgrid: false,
+							visible: true,
+							showticklabels: true,
+							showline: false,
+							showspikes: false,
+							showtickprefix: false,
+							color: "#000",
+							range: "100",
+						},
+						yaxis: {
+							zeroline: false,
+							showgrid: false,
+							visible: false,
+							showticklabels: false,
+							showline: false,
+							showspikes: false,
+							showtickprefix: false,
+						},
+						zaxis: {
+							zeroline: false,
+							showgrid: false,
+							visible: false,
+							showticklabels: false,
+							showline: false,
+							showspikes: false,
+							showtickprefix: false,
+						},
+					},
+				}}
+				onClick={event => {
+					console.log("click");
+					if (canHover) {
+						let timer;
+						clearTimeout(timer);
+						timer = setTimeout(() => {
+							console.log("opa1");
+							setCanHover(false);
+							setLastEvent(event);
+						}, 300);
+					} else {
+						let timer;
+						clearTimeout(timer);
+						timer = setTimeout(() => {
+							console.log("opa");
+							onHandleModal(lastEvent);
+						}, 500);
+					}
+				}}
+				onHover={event => {
+					if (event.points[0].data.id === "points" && canHover) {
+						onHoverGraph(event.points[0].data);
+					}
+				}}
+			/>
 
-			<MemoizedModal event={event} isOpen={isOpen} onClose={() => closeModal()} />
+			<MemoizedModal
+				event={event}
+				isOpen={isOpen}
+				onClose={() => closeModal()}
+			/>
 		</>
 	);
 };
